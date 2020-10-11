@@ -2,6 +2,6 @@
 {
     public interface IBenefitCostStrategy
     {
-        public double GetBenefitCost(double annualCost);
+        public decimal GetBenefitCost(decimal annualCost);
     }
 }

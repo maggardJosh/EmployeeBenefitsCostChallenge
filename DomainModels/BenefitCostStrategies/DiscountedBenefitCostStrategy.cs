@@ -2,16 +2,16 @@
 {
     internal class DiscountedBenefitCostStrategy : IBenefitCostStrategy
     {
-        private readonly double _discountMultiplier;
+        private readonly decimal _discountMultiplier;
 
         //TODO: Write unit tests for expected outcome
-        public DiscountedBenefitCostStrategy(double discountPercent)
+        public DiscountedBenefitCostStrategy(decimal discountPercent)
         {
             //TODO: guard clauses < 0 or > 100, write tests as well
-            _discountMultiplier = 1 - (discountPercent / 100.0);
+            _discountMultiplier = 1 - (discountPercent / 100.0M);
         }
 
-        public double GetBenefitCost(double annualBenefitCost)
+        public decimal GetBenefitCost(decimal annualBenefitCost)
         {
             return annualBenefitCost * _discountMultiplier;
         }

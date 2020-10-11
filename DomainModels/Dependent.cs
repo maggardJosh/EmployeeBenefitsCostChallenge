@@ -2,6 +2,10 @@
 {
     public class Dependent : Person
     {
-        protected override double StandardAnnualBenefitCost => 500; //Ideally would make this driven by data
+        protected override decimal StandardAnnualBenefitCost => 500; //Ideally would make this driven by data
+
+        public Dependent(string firstName, string lastName) : base(firstName, lastName)
+        {
+        }
     }
 }

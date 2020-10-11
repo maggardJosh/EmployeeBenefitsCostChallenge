@@ -6,10 +6,18 @@ namespace EmployeeBenefitsCostChallenge.DomainModels
 
     public class Employee : Person
     {
-        public IEnumerable<Dependent> Dependents { get; set; }
+        public IList<Dependent> Dependents { get; set; } = new List<Dependent>();
 
-        protected override double StandardAnnualBenefitCost => 1000; //Ideally would make this driven by data
-        public override double AnnualBenefitCost => base.AnnualBenefitCost + Dependents.Sum(d => d.AnnualBenefitCost);        //TODO: Write unit tests for this
+        protected override decimal StandardAnnualBenefitCost => 1000; //Ideally would make this driven by data
+        public override decimal AnnualBenefitCost => base.AnnualBenefitCost + Dependents.Sum(d => d.AnnualBenefitCost);        //TODO: Write unit tests for this
 
+        public Employee(string firstName, string lastName) : base(firstName, lastName)
+        {
+        }
+
+        public void AddDependent(Dependent dependent)
+        {
+            Dependents.Add(dependent);
+        }
     }
 }
