@@ -1,4 +1,5 @@
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
+using EmployeeBenefitsCostChallenge.Domain.Services;
 using EmployeeBenefitsCostChallenge.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,21 +19,21 @@ namespace EmployeeBenefitsCostChallenge
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
 
             services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IBenefitCostService, BenefitCostService>();
+            services.AddScoped<IBenefitCostStrategyFactory, BenefitCostStrategyFactory>();
+            services.AddTransient<IBenefitCostSettings, HardcodedBenefitCostSettings>();
 
-            // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

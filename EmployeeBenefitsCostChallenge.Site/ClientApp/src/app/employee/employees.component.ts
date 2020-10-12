@@ -22,6 +22,10 @@ interface IEmployee extends IPerson {
 
 interface IPerson {
   name: string;
-  benefitCost: number;
+  benefitCost: IBenefitCostResult;
+}
+
+interface IBenefitCostResult {
+  annualBenefitCost: number;
   paycheckBenefitCost: number;
 }

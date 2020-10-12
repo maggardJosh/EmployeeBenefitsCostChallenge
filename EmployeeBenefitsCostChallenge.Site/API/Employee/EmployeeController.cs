@@ -2,6 +2,7 @@
 using System.Linq;
 using EmployeeBenefitsCostChallenge.API.Employee.Models;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
+using EmployeeBenefitsCostChallenge.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,11 +14,13 @@ namespace EmployeeBenefitsCostChallenge.API.Employee
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly ILogger<EmployeeController> _logger;
+        private readonly IBenefitCostService _benefitCostService;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger)
+        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger, IBenefitCostService benefitCostService)
         {
             _employeeRepository = employeeRepository;
             _logger = logger;
+            _benefitCostService = benefitCostService;
         }
 
         [HttpGet]
@@ -27,13 +30,11 @@ namespace EmployeeBenefitsCostChallenge.API.Employee
             return allEmployees.Select(employee => new EmployeeData
             {
                 Name = $"{employee.FirstName} {employee.LastName}",
-                BenefitCost = employee.AnnualBenefitCost,
-                PaycheckBenefitCost = employee.BenefitCostPerPaycheck,
+                BenefitCost = _benefitCostService.GetBenefitCost(employee),
                 DependentData = employee.Dependents.Select(d => new EmployeeData
                 {
-                    BenefitCost = d.AnnualBenefitCost,
                     Name = $"{d.FirstName} {d.LastName}",
-                    PaycheckBenefitCost = d.BenefitCostPerPaycheck
+                    BenefitCost = _benefitCostService.GetBenefitCost(d),
                 }).ToList().AsReadOnly()
             });
 
