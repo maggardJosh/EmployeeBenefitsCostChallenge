@@ -9,6 +9,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
         {
         }
 
+        //TODO: Potentially cover this function in tests
         public override decimal GetStandardAnnualBenefitCost(IBenefitCostSettings settings)
         {
             return settings.StandardAnnualBenefitCost;

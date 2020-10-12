@@ -16,10 +16,9 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
 
         public IBenefitCostStrategy GetStrategy(Person p)
         {
-            //TODO: Unit test BenefitCostStrategyFactory both paths
-            //Assuming case of first letter is not important, would verify with stakeholder
             if (p.FirstName.StartsWith("A", StringComparison.CurrentCultureIgnoreCase))
                 return new DiscountedBenefitCostStrategy(_aNameDiscountPercent);
+
             return new StandardBenefitCostStrategy();
         }
     }

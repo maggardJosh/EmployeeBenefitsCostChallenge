@@ -37,7 +37,6 @@ namespace EmployeeBenefitsCostChallenge.API.Employee
                     BenefitCost = _benefitCostService.GetBenefitCost(dependent),
                 }).ToList().AsReadOnly()
             });
-
         }
     }
 }
