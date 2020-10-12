@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-benefit-cost',
@@ -8,7 +7,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class BenefitCostComponent {
   public benefitCosts: BenefitCost[];
-  faCoffee = faCoffee;
+  
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<BenefitCost[]>(baseUrl + 'api/benefitcost').subscribe(result => {
