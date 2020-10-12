@@ -13,10 +13,10 @@
   <tbody>
     <tr *ngFor="let employee of employees">
       <td>{{ employee.name }}</td>
-      <td> <span placement="top" ngbTooltip="({{employee.paycheckBenefitCost | currency}} per paycheck)">{{ employee.benefitCost | currency}}</span> </td>
+      <td> <span placement="top" ngbTooltip="({{employee.benefitCost.paycheckBenefitCost | currency}} per paycheck)">{{ employee.benefitCost.annualBenefitCost | currency}}</span> </td>
       <td>
         <div *ngIf="!employee.dependentData.length">No Dependents</div>
-        <div *ngFor="let dependent of employee.dependentData">{{ dependent.name }} -  <span placement="top" ngbTooltip="({{dependent.paycheckBenefitCost | currency}} per paycheck)">{{dependent.benefitCost | currency}}</span> </div>
+        <div *ngFor="let dependent of employee.dependentData">{{ dependent.name }} -  <span placement="top" ngbTooltip="({{dependent.benefitCost.paycheckBenefitCost | currency}} per paycheck)">{{dependent.benefitCost.annualBenefitCost | currency}}</span> </div>
       </td>
     </tr>
   </tbody>
