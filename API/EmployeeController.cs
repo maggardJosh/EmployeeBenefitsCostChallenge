@@ -8,27 +8,27 @@ namespace EmployeeBenefitsCostChallenge.API
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BenefitCostController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly ILogger<BenefitCostController> _logger;
+        private readonly ILogger<EmployeeController> _logger;
 
-        public BenefitCostController(IEmployeeRepository employeeRepository, ILogger<BenefitCostController> logger)
+        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger)
         {
             _employeeRepository = employeeRepository;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<BenefitCostData> Get()
+        public IEnumerable<EmployeeData> Get()
         {
             IEnumerable<Employee> allEmployees = _employeeRepository.GetAllEmployees();
-            return allEmployees.Select(employee => new BenefitCostData
+            return allEmployees.Select(employee => new EmployeeData
             {
                 Name = $"{employee.FirstName} {employee.LastName}",
                 BenefitCost = employee.AnnualBenefitCost,
                 PaycheckBenefitCost = employee.BenefitCostPerPaycheck,
-                DependentCostData = employee.Dependents.Select(d => new BenefitCostData
+                DependentData = employee.Dependents.Select(d => new EmployeeData
                 {
                     BenefitCost = d.AnnualBenefitCost,
                     Name = $"{d.FirstName} {d.LastName}",
@@ -57,12 +57,17 @@ namespace EmployeeBenefitsCostChallenge.API
         }
     }
 
-    public class BenefitCostData
+    public class EmployeeData : PersonData
+    {
+        public IReadOnlyCollection<PersonData> DependentData { get; set; }
+
+    }
+
+    public class PersonData
     {
         public string Name { get; set; }
         public decimal BenefitCost { get; set; }
-        public IReadOnlyCollection<BenefitCostData> DependentCostData { get; set; }
         public decimal PaycheckBenefitCost { get; set; }
     }
-}
 
+}
