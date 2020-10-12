@@ -8,14 +8,12 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { EmployeesComponent } from "./employee/employees.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
     EmployeesComponent
   ],
   imports: [
@@ -24,8 +22,7 @@ import { EmployeesComponent } from "./employee/employees.component";
     FormsModule,
     NgbModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'employees', component: EmployeesComponent },
+      { path: '', component: EmployeesComponent, pathMatch: 'full' },
     ])
   ],
   providers: [],
