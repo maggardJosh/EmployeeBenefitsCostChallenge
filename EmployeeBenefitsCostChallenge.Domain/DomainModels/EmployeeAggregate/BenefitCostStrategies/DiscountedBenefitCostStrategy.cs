@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmployeeBenefitsCostChallenge.DomainModels.BenefitCostStrategies
+namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate.BenefitCostStrategies
 {
     internal class DiscountedBenefitCostStrategy : IBenefitCostStrategy
     {

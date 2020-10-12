@@ -1,7 +1,7 @@
 ﻿using System;
-using EmployeeBenefitsCostChallenge.DomainModels.BenefitCostStrategies;
+using EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate.BenefitCostStrategies;
 
-namespace EmployeeBenefitsCostChallenge.DomainModels
+namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate
 {
     public abstract class Person
     {

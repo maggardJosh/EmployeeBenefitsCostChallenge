@@ -2,10 +2,12 @@
 using FluentAssertions;
 using Xunit;
 
-namespace EmployeeBenefitsCostChallenge.DomainModels.BenefitCostStrategies
+namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate.BenefitCostStrategies
 {
-    public class BenefitCostStrategyTests
+    public class DiscountedBenefitCostStrategyTests
     {
+       
+
         [Theory]
         [InlineData(10, 1000, 900)]
         [InlineData(50, 10000, 5000)]

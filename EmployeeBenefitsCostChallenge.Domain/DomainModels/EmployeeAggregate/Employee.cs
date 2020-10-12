@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace EmployeeBenefitsCostChallenge.DomainModels
+namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate
 {
 
     public class Employee : Person

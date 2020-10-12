@@ -1,4 +1,4 @@
-﻿namespace EmployeeBenefitsCostChallenge.DomainModels
+﻿namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate
 {
     public class Dependent : Person
     {

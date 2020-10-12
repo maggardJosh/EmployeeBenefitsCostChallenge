@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EmployeeBenefitsCostChallenge.DomainModels;
+using EmployeeBenefitsCostChallenge.API.Employee.Models;
+using EmployeeBenefitsCostChallenge.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace EmployeeBenefitsCostChallenge.API
+namespace EmployeeBenefitsCostChallenge.API.Employee
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -22,7 +23,7 @@ namespace EmployeeBenefitsCostChallenge.API
         [HttpGet]
         public IEnumerable<EmployeeData> Get()
         {
-            IEnumerable<Employee> allEmployees = _employeeRepository.GetAllEmployees();
+            IEnumerable<Domain.DomainModels.EmployeeAggregate.Employee> allEmployees = _employeeRepository.GetAllEmployees();
             return allEmployees.Select(employee => new EmployeeData
             {
                 Name = $"{employee.FirstName} {employee.LastName}",
@@ -38,36 +39,4 @@ namespace EmployeeBenefitsCostChallenge.API
 
         }
     }
-
-    public interface IEmployeeRepository
-    {
-        IEnumerable<Employee> GetAllEmployees();
-    }
-
-    class MockEmployeeRepository : IEmployeeRepository
-    {
-        public IEnumerable<Employee> GetAllEmployees()
-        {
-            var e1 = new Employee("Josh", "Maggard");
-            e1.AddDependent(new Dependent("Bob", "Bobson"));
-            e1.AddDependent(new Dependent("Alice", "Bobson"));
-
-            var e2 = new Employee("George", "Man");
-            return new[] { e1, e2 };
-        }
-    }
-
-    public class EmployeeData : PersonData
-    {
-        public IReadOnlyCollection<PersonData> DependentData { get; set; }
-
-    }
-
-    public class PersonData
-    {
-        public string Name { get; set; }
-        public decimal BenefitCost { get; set; }
-        public decimal PaycheckBenefitCost { get; set; }
-    }
-
 }
