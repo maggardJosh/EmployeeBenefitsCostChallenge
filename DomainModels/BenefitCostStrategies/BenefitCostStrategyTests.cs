@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Xunit;
 
 namespace EmployeeBenefitsCostChallenge.DomainModels.BenefitCostStrategies
@@ -19,6 +20,17 @@ namespace EmployeeBenefitsCostChallenge.DomainModels.BenefitCostStrategies
 
             //Assert
             result.Should().Be(expectedResult);
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(101)]
+        public void Discount_GivenInvalidDiscount_ThrowsException(decimal discountAmount)
+        {
+            //arrange
+            //act
+            //assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => new DiscountedBenefitCostStrategy(discountAmount));
         }
 
     }
