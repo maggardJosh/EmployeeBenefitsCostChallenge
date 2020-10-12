@@ -1,4 +1,4 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Services;
+﻿using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost;
 
 namespace EmployeeBenefitsCostChallenge.API.Employee.Models
 {

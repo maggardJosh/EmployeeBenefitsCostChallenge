@@ -1,4 +1,4 @@
-﻿namespace EmployeeBenefitsCostChallenge.Domain.Services
+﻿namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {
     public class BenefitCostResult
     {

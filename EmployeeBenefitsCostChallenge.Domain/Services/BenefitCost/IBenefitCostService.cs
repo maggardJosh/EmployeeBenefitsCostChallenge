@@ -1,6 +1,6 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate;
+﻿using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 
-namespace EmployeeBenefitsCostChallenge.Domain.Services
+namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {
     public interface IBenefitCostService
     {

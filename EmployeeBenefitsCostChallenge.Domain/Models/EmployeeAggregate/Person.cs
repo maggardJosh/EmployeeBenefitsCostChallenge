@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using EmployeeBenefitsCostChallenge.Domain.Services;
+﻿using System.Collections.Generic;
+using EmployeeBenefitsCostChallenge.Domain.Common;
 
-namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate
+namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
     public abstract class Person
     {
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public string DisplayName => $"{FirstName} {LastName}";
 
         public abstract decimal GetStandardAnnualBenefitCost(IBenefitCostSettings settings);
 

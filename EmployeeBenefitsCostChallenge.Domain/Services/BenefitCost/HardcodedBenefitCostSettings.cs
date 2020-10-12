@@ -1,4 +1,6 @@
-﻿namespace EmployeeBenefitsCostChallenge.Domain.Services
+﻿using EmployeeBenefitsCostChallenge.Domain.Common;
+
+namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {
     public class HardcodedBenefitCostSettings : IBenefitCostSettings
     {

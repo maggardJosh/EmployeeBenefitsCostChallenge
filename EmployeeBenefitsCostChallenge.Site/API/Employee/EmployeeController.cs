@@ -2,7 +2,7 @@
 using System.Linq;
 using EmployeeBenefitsCostChallenge.API.Employee.Models;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
-using EmployeeBenefitsCostChallenge.Domain.Services;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -26,15 +26,15 @@ namespace EmployeeBenefitsCostChallenge.API.Employee
         [HttpGet]
         public IEnumerable<EmployeeData> Get()
         {
-            IEnumerable<Domain.DomainModels.EmployeeAggregate.Employee> allEmployees = _employeeRepository.GetAllEmployees();
+            IEnumerable<Domain.Models.EmployeeAggregate.Employee> allEmployees = _employeeRepository.GetAllEmployees();
             return allEmployees.Select(employee => new EmployeeData
             {
-                Name = $"{employee.FirstName} {employee.LastName}",
+                Name = employee.DisplayName,
                 BenefitCost = _benefitCostService.GetBenefitCost(employee),
-                DependentData = employee.Dependents.Select(d => new EmployeeData
+                DependentData = employee.Dependents.Select(dependent => new EmployeeData
                 {
-                    Name = $"{d.FirstName} {d.LastName}",
-                    BenefitCost = _benefitCostService.GetBenefitCost(d),
+                    Name = dependent.DisplayName,
+                    BenefitCost = _benefitCostService.GetBenefitCost(dependent),
                 }).ToList().AsReadOnly()
             });
 

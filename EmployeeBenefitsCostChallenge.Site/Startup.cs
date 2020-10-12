@@ -1,5 +1,6 @@
+using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
-using EmployeeBenefitsCostChallenge.Domain.Services;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost;
 using EmployeeBenefitsCostChallenge.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,7 @@ namespace EmployeeBenefitsCostChallenge
             services.AddControllersWithViews();
 
             services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+
             services.AddScoped<IBenefitCostService, BenefitCostService>();
             services.AddScoped<IBenefitCostStrategyFactory, BenefitCostStrategyFactory>();
             services.AddTransient<IBenefitCostSettings, HardcodedBenefitCostSettings>();

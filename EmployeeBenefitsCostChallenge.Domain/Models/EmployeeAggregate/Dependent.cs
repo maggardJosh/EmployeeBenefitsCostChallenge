@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using EmployeeBenefitsCostChallenge.Domain.Services;
+using EmployeeBenefitsCostChallenge.Domain.Common;
 
-namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate
+namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
     public class Dependent : Person
     {

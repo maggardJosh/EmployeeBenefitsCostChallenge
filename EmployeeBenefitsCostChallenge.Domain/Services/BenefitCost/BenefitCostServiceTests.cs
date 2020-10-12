@@ -1,9 +1,10 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Services;
+﻿using EmployeeBenefitsCostChallenge.Domain.Common;
+using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate
+namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {
     public class BenefitCostServiceTests
     {

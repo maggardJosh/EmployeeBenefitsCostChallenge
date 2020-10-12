@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using EmployeeBenefitsCostChallenge.Domain.Services;
+using EmployeeBenefitsCostChallenge.Domain.Common;
 
-namespace EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate
+namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
-
     public class Employee : Person
     {
         public Employee(string firstName, string lastName) : base(firstName, lastName)

@@ -1,7 +1,8 @@
 ﻿using System.Linq;
-using EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate;
+using EmployeeBenefitsCostChallenge.Domain.Common;
+using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 
-namespace EmployeeBenefitsCostChallenge.Domain.Services
+namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {
     public class BenefitCostService : IBenefitCostService
     {

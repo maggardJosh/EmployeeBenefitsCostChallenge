@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using EmployeeBenefitsCostChallenge.Domain.DomainModels.EmployeeAggregate;
+using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
 
 namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
