@@ -1,6 +1,6 @@
 ﻿using EmployeeBenefitsCostChallenge.Domain.Common;
 
-namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
+namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
 {
     public class HardcodedBenefitCostSettings : IBenefitCostSettings
     {

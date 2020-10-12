@@ -1,6 +1,7 @@
 using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
 using EmployeeBenefitsCostChallenge.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

@@ -1,5 +1,6 @@
 ﻿using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
 using FluentAssertions;
 using Moq;
 using Xunit;
@@ -60,6 +61,20 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 
             //assert
             annualBenefitCost.Should().Be(1500);
+        }
+
+        [Fact]
+        public void PaycheckBenefitCost_StandardEmployee_ReturnsCorrectAmount()
+        {
+            //arrange
+            Person p = new Employee("George", "Random");
+            BenefitCostService service = GetMockBenefitCostService();
+
+            //act
+            var paycheckBenefitCost = service.GetBenefitCost(p).PaycheckBenefitCost;
+
+            //assert
+            paycheckBenefitCost.Should().Be(1000M/26);
         }
     }
 }

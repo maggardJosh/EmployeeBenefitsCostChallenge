@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
 
 namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {

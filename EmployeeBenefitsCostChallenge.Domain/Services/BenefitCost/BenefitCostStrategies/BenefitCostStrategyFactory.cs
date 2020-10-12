@@ -1,9 +1,9 @@
 ﻿using System;
 using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
-using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies.Concrete;
 
-namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
+namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies
 {
     public class BenefitCostStrategyFactory : IBenefitCostStrategyFactory
     {
