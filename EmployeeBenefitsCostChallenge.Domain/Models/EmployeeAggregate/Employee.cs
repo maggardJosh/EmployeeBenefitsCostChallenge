@@ -12,9 +12,9 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
         }
 
         //TODO: Potentially cover this function in tests
-        public override decimal GetStandardAnnualBenefitCost(IBenefitCostSettings settings)
+        public override decimal GetStandardAnnualBenefitCost(IBenefitCostSettingsRepository settingsRepository)
         {
-            return settings.StandardAnnualBenefitCost;
+            return settingsRepository.StandardAnnualBenefitCost;
         }
 
         public override IReadOnlyList<Dependent> Dependents => _dependents.AsReadOnly();

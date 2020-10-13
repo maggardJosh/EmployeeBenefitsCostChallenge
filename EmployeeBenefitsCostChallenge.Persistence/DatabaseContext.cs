@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using EmployeeBenefitsCostChallenge.Domain.Common;
-using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+﻿using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeBenefitsCostChallenge.Persistence
@@ -13,14 +9,15 @@ namespace EmployeeBenefitsCostChallenge.Persistence
         {
 
         }
+
         public DbSet<Employee> Employees { get; set; }
-        
+        public DbSet<ApplicationSettings> ApplicationSettings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().ToTable("Employee");
             modelBuilder.Entity<Dependent>().ToTable("Dependent");
+            modelBuilder.Entity<ApplicationSettings>().ToTable("ApplicationSetting");
         }
     }
-
 }

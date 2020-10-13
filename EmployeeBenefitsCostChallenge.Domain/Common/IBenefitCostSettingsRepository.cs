@@ -1,6 +1,6 @@
 ﻿namespace EmployeeBenefitsCostChallenge.Domain.Common
 {
-    public interface IBenefitCostSettings
+    public interface IBenefitCostSettingsRepository
     {
         decimal ANameDiscountPercent { get; }
         int NumberOfPaychecksPerYear { get;}

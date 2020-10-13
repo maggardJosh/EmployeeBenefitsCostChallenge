@@ -2,7 +2,7 @@
 
 namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
 {
-    public class HardcodedBenefitCostSettings : IBenefitCostSettings
+    public class DefaultLocalBenefitCostSettingsRepository : IBenefitCostSettingsRepository
     {
         public int NumberOfPaychecksPerYear => 26;
         public decimal StandardAnnualBenefitCost => 1000;

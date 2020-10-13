@@ -9,9 +9,9 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
     {
         private readonly decimal _aNameDiscountPercent;
 
-        public BenefitCostStrategyFactory(IBenefitCostSettings benefitCostSettings)
+        public BenefitCostStrategyFactory(IBenefitCostSettingsRepository benefitCostSettingsRepository)
         {
-            _aNameDiscountPercent = benefitCostSettings.ANameDiscountPercent;
+            _aNameDiscountPercent = benefitCostSettingsRepository.ANameDiscountPercent;
         }
 
         public IBenefitCostStrategy GetStrategy(Person p)

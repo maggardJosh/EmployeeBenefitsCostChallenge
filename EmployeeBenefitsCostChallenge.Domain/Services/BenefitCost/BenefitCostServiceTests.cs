@@ -11,7 +11,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
     {
         private BenefitCostService GetMockBenefitCostService()
         {
-            var benefitCostSettings = new Mock<IBenefitCostSettings>();
+            var benefitCostSettings = new Mock<IBenefitCostSettingsRepository>();
             benefitCostSettings.SetupGet(settings => settings.StandardAnnualBenefitCost).Returns(1000);
             benefitCostSettings.SetupGet(settings => settings.DependentAnnualBenefitCost).Returns(500);
             benefitCostSettings.SetupGet(settings => settings.NumberOfPaychecksPerYear).Returns(26);

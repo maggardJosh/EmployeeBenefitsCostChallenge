@@ -10,7 +10,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 
         public string DisplayName => $"{FirstName} {LastName}";
 
-        public abstract decimal GetStandardAnnualBenefitCost(IBenefitCostSettings settings);
+        public abstract decimal GetStandardAnnualBenefitCost(IBenefitCostSettingsRepository settingsRepository);
 
         public abstract IReadOnlyList<Dependent> Dependents { get; }
 

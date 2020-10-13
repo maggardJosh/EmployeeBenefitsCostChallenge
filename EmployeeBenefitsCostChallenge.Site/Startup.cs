@@ -28,10 +28,10 @@ namespace EmployeeBenefitsCostChallenge
             services.AddControllersWithViews();
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IBenefitCostSettingsRepository, BenefitCostSettingsRepositoryRepository>();
 
             services.AddScoped<IBenefitCostService, BenefitCostService>();
             services.AddScoped<IBenefitCostStrategyFactory, BenefitCostStrategyFactory>();
-            services.AddTransient<IBenefitCostSettings, HardcodedBenefitCostSettings>();
 
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
