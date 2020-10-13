@@ -5,6 +5,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
     public class Dependent : Person
     {
+        public int DependentID { get; set; }
         public Dependent(string firstName, string lastName) : base(firstName, lastName)
         {
         }

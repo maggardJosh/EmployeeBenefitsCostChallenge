@@ -2,10 +2,12 @@ using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
+using EmployeeBenefitsCostChallenge.Persistence;
 using EmployeeBenefitsCostChallenge.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,11 +27,13 @@ namespace EmployeeBenefitsCostChallenge
         {
             services.AddControllersWithViews();
 
-            services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             services.AddScoped<IBenefitCostService, BenefitCostService>();
             services.AddScoped<IBenefitCostStrategyFactory, BenefitCostStrategyFactory>();
             services.AddTransient<IBenefitCostSettings, HardcodedBenefitCostSettings>();
+
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSpaStaticFiles(configuration =>
             {
