@@ -107,7 +107,7 @@ namespace EmployeeBenefitsCostChallenge.Persistence
             if (result == null)
                 throw new Exception("Missing Application Setting for " + settingName);
 
-            if (int.TryParse(result, out int parsedValue))
+            if (!int.TryParse(result, out int parsedValue))
                 throw new Exception(
                     $"Application Setting for {settingName} configured incorrectly");
 

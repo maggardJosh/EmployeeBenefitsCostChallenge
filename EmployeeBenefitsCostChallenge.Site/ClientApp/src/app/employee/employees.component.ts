@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { IEmployee } from '../shared/interfaces';
 
 @Component({
   selector: 'app-employees',
@@ -9,23 +11,13 @@ export class EmployeesComponent {
   public employees: IEmployee[];
   
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string,
+    private router: Router) {
     http.get<IEmployee[]>(baseUrl + 'api/employee').subscribe(result => {
       this.employees = result;
+      console.log(result);
     }, error => console.error(error));
   }
 }
 
-interface IEmployee extends IPerson {
-  dependentData: IPerson[];
-}
-
-interface IPerson {
-  name: string;
-  benefitCost: IBenefitCostResult;
-}
-
-interface IBenefitCostResult {
-  annualBenefitCost: number;
-  paycheckBenefitCost: number;
-}

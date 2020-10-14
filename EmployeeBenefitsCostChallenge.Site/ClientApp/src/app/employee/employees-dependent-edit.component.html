@@ -1,0 +1,28 @@
+<h3>Dependents</h3>
+<form [formGroup]="dependentForm">
+  <table *ngIf="dependentForm.controls.dependentsArr.value.length">
+    <thead>
+      <tr>
+        <td></td>
+        <td>First Name</td>
+        <td>Last Name</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr formArrayName="dependentsArr" *ngFor="let p of dependentForm.controls.dependentsArr.value; let i = index">
+        <ng-container [formGroupName]="i">
+          <td>
+            <button (click)="deleteDependent(i)">Delete</button>
+          </td>
+          <td>
+            <input placeholder="First Name" formControlName="firstName" />
+          </td>
+          <td>
+            <input placeholder="Last Name" formControlName="lastName" />
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="addDependent()">Add Dependent</button>
+</form>

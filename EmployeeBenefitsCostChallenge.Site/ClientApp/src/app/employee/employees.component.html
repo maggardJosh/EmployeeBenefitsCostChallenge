@@ -12,16 +12,16 @@
   </thead>
   <tbody>
     <tr *ngFor="let employee of employees">
-      <td>{{ employee.name }}</td>
+      <td><a [routerLink]="['/employees', employee.id]">{{ employee.firstName }} {{ employee.lastName }}</a></td>
       <td>
         <span placement="top" ngbTooltip="({{employee.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
-          {{ employee.benefitCost.annualBenefitCost | currency}}
+          {{ employee.benefitCost.annualBenefitCost | currency }}
         </span>
       </td>
       <td>
         <div *ngIf="!employee.dependentData.length">No Dependents</div>
         <div *ngFor="let dependent of employee.dependentData">
-          {{ dependent.name }} -
+          {{ dependent.firstName }} {{dependent.lastName }} -
           <span placement="top" ngbTooltip="({{dependent.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
             {{dependent.benefitCost.annualBenefitCost | currency}}
           </span>

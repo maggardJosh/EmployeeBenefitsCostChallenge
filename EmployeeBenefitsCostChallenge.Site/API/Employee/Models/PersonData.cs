@@ -4,7 +4,8 @@ namespace EmployeeBenefitsCostChallenge.API.Employee.Models
 {
     public class PersonData
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public BenefitCostResult BenefitCost { get; set; }
     }
 }

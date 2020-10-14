@@ -15,5 +15,15 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
             var e2 = new Employee("George", "Man");
             return new[] { e1, e2 };
         }
+
+        public void AddEmployee(Employee newEmployee)
+        {
+            return;
+        }
+
+        public Employee GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

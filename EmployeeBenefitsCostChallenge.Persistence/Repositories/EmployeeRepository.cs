@@ -20,5 +20,19 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
                 .Include(employee => employee.Dependents )
                 .ToList();
         }
+
+        public void AddEmployee(Employee newEmployee)
+        {
+            _dbContext.Employees.Add(newEmployee);
+            _dbContext.SaveChanges();
+        }
+
+        public Employee GetById(int id)
+        {
+            //TODO: Handle null
+            return _dbContext.Employees
+                .Include(employee => employee.Dependents)
+                .FirstOrDefault(e => e.EmployeeID == id);
+        }
     }
 }
