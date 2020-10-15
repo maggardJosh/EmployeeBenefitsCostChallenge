@@ -19,8 +19,8 @@
         </span>
       </td>
       <td>
-        <div *ngIf="!employee.dependentData.length">No Dependents</div>
-        <div *ngFor="let dependent of employee.dependentData">
+        <div *ngIf="!employee.dependents.length">No Dependents</div>
+        <div *ngFor="let dependent of employee.dependents">
           {{ dependent.firstName }} {{dependent.lastName }} -
           <span placement="top" ngbTooltip="({{dependent.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
             {{dependent.benefitCost.annualBenefitCost | currency}}

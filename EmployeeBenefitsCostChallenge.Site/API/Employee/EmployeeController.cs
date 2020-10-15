@@ -41,7 +41,7 @@ namespace EmployeeBenefitsCostChallenge.API.Employee
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
                 BenefitCost = _benefitCostService.GetBenefitCost(employee),
-                DependentData = employee.Dependents.Select(dependent => new EmployeeData
+                Dependents = employee.Dependents.Select(dependent => new EmployeeData
                 {
                     FirstName = dependent.FirstName,
                     LastName = dependent.LastName,

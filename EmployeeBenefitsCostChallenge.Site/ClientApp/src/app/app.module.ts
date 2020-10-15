@@ -10,15 +10,13 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { EmployeesComponent } from "./employee/employees.component";
 import { EmployeesEditComponent } from "./employee/employees-edit.component";
-import { EmployeesDependentEditComponent } from "./employee/employees-dependent-edit.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     EmployeesComponent,
-    EmployeesEditComponent,
-    EmployeesDependentEditComponent
+    EmployeesEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

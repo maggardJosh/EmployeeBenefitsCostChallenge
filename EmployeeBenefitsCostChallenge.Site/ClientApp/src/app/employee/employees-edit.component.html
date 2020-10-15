@@ -1,18 +1,28 @@
-<div>
-  <header>
-    <h3>
-      {{employee.firstName}} {{employee.lastName}}
-    </h3>
-  </header>
-  <br/>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="!loaded">Loading...</div>
+  <div *ngIf="loaded">
+    <h2>Employee Information</h2>
     <div class="form-group">
-      <label>First Name</label>
-      <input type="text" class="form-control" name="firstName" [(ngModel)]="employee.firstName" #firstName="ngModel" required />
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" />
     </div>
     <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" class="form-control" name="lastName" [(ngModel)]="employee.lastName" #lastName="ngModel" required />
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName" />
     </div>
-    <employees-dependent-edit [dependents]="employee.dependentData"></employees-dependent-edit>
-  
-</div>
+    <h3>Dependents</h3>
+    <div *ngIf="dependents.controls.length" formArrayName="dependents" class="form-group">
+      <div *ngFor="let control of dependents.controls; index as i" formGroupName="{{i}}" class="form-group">
+        <!--todo: change this to a table, get post working for this form :D-->
+        <button type="button" class="btn-danger" (click)="removeDependent(i)">Remove</button>
+        <input placeholder="First Name" formControlName="firstName"/>
+        <input placeholder="Last Name" formControlName="lastName"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn-success" (click)="addDependent()">Add Dependent</button>
+    </div>
+    <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+    <button type="button" class="btn-primary" (click)="onSubmit()">Save</button>
+  </div>
+</form>
