@@ -24,5 +24,10 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
         {
             _dependents.Add(dependent);
         }
+
+        public void ClearDependents()
+        {
+            _dependents.Clear();
+        }
     }
 }

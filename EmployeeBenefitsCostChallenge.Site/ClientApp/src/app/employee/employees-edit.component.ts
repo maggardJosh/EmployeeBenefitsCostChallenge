@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee, Dependent } from "./models/Employee.model";
 
 @Component({
@@ -15,22 +15,21 @@ export class EmployeesEditComponent {
 
 
   constructor(private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder) {
     this.employeeForm = this.buildForm(new Employee());
   }
 
-  buildForm(e:Employee): FormGroup {
+  buildForm(e: Employee): FormGroup {
     return this.fb.group({
       firstName: e.firstName,
       lastName: e.lastName,
-      dependents: this.fb.array(e.dependents.map(d=>this.buildDependentForm(d)))
+      dependents: this.fb.array(e.dependents.map(d => this.buildDependentForm(d)))
     });
   }
 
   buildDependentForm(d: Dependent): FormGroup {
-    
     return this.fb.group({ firstName: d.firstName, lastName: d.lastName });
   }
 
@@ -39,29 +38,51 @@ export class EmployeesEditComponent {
   }
 
   ngOnInit() {
-    let id = this.route.snapshot.params['id'];
-    if (id !== '0') {
-      this.http.get<Employee>(this.baseUrl + 'api/employee/' + id).subscribe(result => {
-          //TODO: extract this to data retrieval service
-          this.employeeForm = this.buildForm(result);
-          this.loaded = true;
-        },
-        error => console.error(error));
-    } else {
+    const id = this.route.snapshot.params['id'];
+    if (id === '0') {
       this.loaded = true;
+      return;
     }
+
+    this.http.get<Employee>('api/employee/' + id).subscribe(result => {
+      //TODO: extract this to data retrieval service
+      this.employeeForm = this.buildForm(result);
+      this.loaded = true;
+    },
+      error => console.error(error));
 
 
   }
+
   onSubmit() {
     console.log(this.employeeForm.value);
+    const id = this.route.snapshot.params['id'];
+    if (id === '0') {
+      this.http.post<Employee>('api/employee/', this.employeeForm.value)
+        .subscribe(result => {
+            this.navigateHome();
+            return;
+          },
+          error => console.error(error));
+    }
+
+    this.http.put<Employee>('api/employee/' + id, this.employeeForm.value)
+      .subscribe(result => {
+        this.navigateHome();
+      }, error => console.error(error));
+    //TODO: Better error handling
+
+  }
+
+  navigateHome() {
+    this.router.navigateByUrl('');
   }
 
   addDependent() {
     this.dependents.push(this.buildDependentForm(new Dependent()));
   }
 
-  removeDependent(i:number) {
+  removeDependent(i: number) {
     this.dependents.removeAt(i);
   }
 }

@@ -50,28 +50,52 @@ namespace EmployeeBenefitsCostChallenge.API.Employee
             };
         }
 
-        [HttpPost]
-        public EmployeeData Post(NewEmployeeData newEmployeeData)
-        {
-            Domain.Models.EmployeeAggregate.Employee newEmployee = new Domain.Models.EmployeeAggregate.Employee(newEmployeeData.FirstName, newEmployeeData.LastName);
-            foreach(var d in newEmployeeData.DependentData)
-                newEmployee.AddDependent(new Dependent(d.FirstName, d.LastName));
-            return CreateEmployeeData(newEmployee);
-        }
-
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetEmployeeRoute")]
         public EmployeeData GetByID(int id)
         {
             Domain.Models.EmployeeAggregate.Employee e = _employeeRepository.GetById(id);
             return CreateEmployeeData(e);
         }
+
+        [HttpPost]
+        public ActionResult Post([FromBody]NewEmployeeData newEmployeeData)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            Domain.Models.EmployeeAggregate.Employee newEmployee = new Domain.Models.EmployeeAggregate.Employee(newEmployeeData.FirstName, newEmployeeData.LastName);
+            foreach(var dependentData in newEmployeeData.Dependents)
+                newEmployee.AddDependent(new Dependent(dependentData.FirstName, dependentData.LastName));
+            _employeeRepository.AddEmployee(newEmployee);
+            //TODO: Try catch log return error
+            return CreatedAtRoute("GetEmployeeRoute", new {id = newEmployee.EmployeeID}, CreateEmployeeData(newEmployee));
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateCustomer(int id, [FromBody] NewEmployeeData employeeData)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            Domain.Models.EmployeeAggregate.Employee employeeToUpdate = _employeeRepository.GetById(id);
+
+            employeeToUpdate.FirstName = employeeData.FirstName;
+            employeeToUpdate.LastName = employeeData.LastName;
+            employeeToUpdate.ClearDependents();
+            foreach(var dependentData in employeeData.Dependents)
+                employeeToUpdate.AddDependent(new Dependent(dependentData.FirstName, dependentData.LastName));
+
+            var updatedEmployee = _employeeRepository.UpdateEmployee(employeeToUpdate);
+            
+            return AcceptedAtRoute("GetEmployeeRoute", new {id = id}, CreateEmployeeData(updatedEmployee));
+        }
+
     }
 
     public class NewEmployeeData
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public NewDependentData[] DependentData { get; set; }
+        public NewDependentData[] Dependents { get; set; }
     }
 
     public class NewDependentData

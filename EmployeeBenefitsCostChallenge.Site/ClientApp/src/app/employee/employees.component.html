@@ -1,16 +1,17 @@
 <h1 id="tableLabel">Employees</h1>
 
 <p *ngIf="!employees"><em>Loading Employee Information...</em></p>
-
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="employees">
-  <thead>
+<div *ngIf="employees">
+  <button type="button" class ="btn btn-success" (click)="navigateToAdd()">Add Employee</button>
+  <table class='table table-striped' aria-labelledby="tableLabel">
+    <thead>
     <tr>
       <th>Name</th>
       <th>Annual Cost</th>
       <th>Dependent Information</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr *ngFor="let employee of employees">
       <td><a [routerLink]="['/employees', employee.id]">{{ employee.firstName }} {{ employee.lastName }}</a></td>
       <td>
@@ -28,5 +29,6 @@
         </div>
       </td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

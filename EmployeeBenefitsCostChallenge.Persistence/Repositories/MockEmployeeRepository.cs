@@ -25,5 +25,10 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
         {
             throw new System.NotImplementedException();
         }
+
+        public Employee UpdateEmployee(Employee employee)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

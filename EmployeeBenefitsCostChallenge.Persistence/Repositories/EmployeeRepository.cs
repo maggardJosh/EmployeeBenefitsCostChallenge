@@ -34,5 +34,12 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
                 .Include(employee => employee.Dependents)
                 .FirstOrDefault(e => e.EmployeeID == id);
         }
+
+        public Employee UpdateEmployee(Employee employee)
+        {
+            _dbContext.Employees.Attach(employee);
+            _dbContext.SaveChanges();
+            return employee;
+        }
     }
 }

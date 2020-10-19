@@ -8,6 +8,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Repositories
         IEnumerable<Employee> GetAllEmployees();
         void AddEmployee(Employee newEmployee);
         Employee GetById(int id);
+        Employee UpdateEmployee(Employee employee);
     }
 
 }
