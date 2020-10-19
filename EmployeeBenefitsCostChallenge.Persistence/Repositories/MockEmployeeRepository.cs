@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
 
@@ -6,27 +7,34 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
 {
     public class MockEmployeeRepository : IEmployeeRepository
     {
-        public IEnumerable<Employee> GetAllEmployees()
+        public OperationResult<IEnumerable<Employee>> GetAllEmployees()
         {
             var e1 = new Employee("Josh", "Maggard");
             e1.AddDependent(new Dependent("Bob", "Bobson"));
             e1.AddDependent(new Dependent("Alice", "Bobson"));
 
             var e2 = new Employee("George", "Man");
-            return new[] { e1, e2 };
+            var employeeArray = new[] {e1, e2};
+
+            return OperationResult<IEnumerable<Employee>>.Ok(employeeArray);
         }
 
-        public void AddEmployee(Employee newEmployee)
-        {
-            return;
-        }
-
-        public Employee GetById(int id)
+        public OperationResult<Employee> AddEmployee(Employee newEmployee)
         {
             throw new System.NotImplementedException();
         }
 
-        public Employee UpdateEmployee(Employee employee)
+        public OperationResult<Employee> GetEmployeeByID(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public OperationResult<Employee> UpdateEmployee(Employee employee)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public OperationResult DeleteEmployee(int id)
         {
             throw new System.NotImplementedException();
         }

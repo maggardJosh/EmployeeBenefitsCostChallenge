@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Castle.Components.DictionaryAdapter;
 using EmployeeBenefitsCostChallenge.Domain.Common;
 
 namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
     public class Dependent : Person
     {
-        public int DependentID { get; set; }
+        public int ID { get; set; }
         public Dependent(string firstName, string lastName) : base(firstName, lastName)
         {
         }
@@ -16,6 +18,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
             return settingsRepository.DependentAnnualBenefitCost;
         }
 
+        [NotMapped]
         public override IReadOnlyList<Dependent> Dependents => new List<Dependent>().AsReadOnly();
     }
 }

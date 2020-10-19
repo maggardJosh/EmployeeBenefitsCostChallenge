@@ -12,6 +12,7 @@ export class EmployeesEditComponent {
 
   employeeForm: FormGroup;
   loaded: boolean = false;
+  isEdit: boolean = false;
 
 
   constructor(private http: HttpClient,
@@ -39,7 +40,8 @@ export class EmployeesEditComponent {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    if (id === '0') {
+    this.isEdit = id !== '0';
+    if (!this.isEdit) {
       this.loaded = true;
       return;
     }
@@ -55,9 +57,8 @@ export class EmployeesEditComponent {
   }
 
   onSubmit() {
-    console.log(this.employeeForm.value);
-    const id = this.route.snapshot.params['id'];
-    if (id === '0') {
+    
+    if (!this.isEdit) {
       this.http.post<Employee>('api/employee/', this.employeeForm.value)
         .subscribe(result => {
             this.navigateHome();
@@ -66,6 +67,7 @@ export class EmployeesEditComponent {
           error => console.error(error));
     }
 
+    const id = this.route.snapshot.params['id'];
     this.http.put<Employee>('api/employee/' + id, this.employeeForm.value)
       .subscribe(result => {
         this.navigateHome();
@@ -84,5 +86,13 @@ export class EmployeesEditComponent {
 
   removeDependent(i: number) {
     this.dependents.removeAt(i);
+  }
+
+  deleteEmployee() {
+    const id = this.route.snapshot.params['id'];
+    this.http.delete('api/employee/' + id)
+      .subscribe(result => {
+        this.navigateHome();
+      }, error => console.error(error));
   }
 }

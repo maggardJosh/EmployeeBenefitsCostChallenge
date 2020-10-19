@@ -15,7 +15,7 @@ namespace EmployeeBenefitsCostChallenge.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().ToTable("Employee");
+            modelBuilder.Entity<Employee>().ToTable("Employee").HasMany(e => e.Dependents).WithOne().OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Dependent>().ToTable("Dependent");
             modelBuilder.Entity<ApplicationSettings>().ToTable("ApplicationSetting");
         }

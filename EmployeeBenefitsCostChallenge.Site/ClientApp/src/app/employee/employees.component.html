@@ -7,18 +7,13 @@
     <thead>
     <tr>
       <th>Name</th>
-      <th>Annual Cost</th>
       <th>Dependent Information</th>
+      <th>Total Annual Cost</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let employee of employees">
       <td><a [routerLink]="['/employees', employee.id]">{{ employee.firstName }} {{ employee.lastName }}</a></td>
-      <td>
-        <span placement="top" ngbTooltip="({{employee.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
-          {{ employee.benefitCost.annualBenefitCost | currency }}
-        </span>
-      </td>
       <td>
         <div *ngIf="!employee.dependents.length">No Dependents</div>
         <div *ngFor="let dependent of employee.dependents">
@@ -27,6 +22,11 @@
             {{dependent.benefitCost.annualBenefitCost | currency}}
           </span>
         </div>
+      </td>
+      <td>
+        <span placement="top" ngbTooltip="({{employee.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
+          {{ employee.benefitCost.annualBenefitCost | currency }}
+        </span>
       </td>
     </tr>
     </tbody>
