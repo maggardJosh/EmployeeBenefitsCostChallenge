@@ -4,6 +4,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {
     public interface IBenefitCostService
     {
-        BenefitCostResult GetBenefitCost(Person p);
+        BenefitCostResult GetTotalBenefitCost(Employee p);
+        BenefitCostResult GetIndividualBenefitCost(Person p);
     }
 }

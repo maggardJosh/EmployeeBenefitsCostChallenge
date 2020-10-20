@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using Castle.Components.DictionaryAdapter;
-using EmployeeBenefitsCostChallenge.Domain.Common;
+﻿using EmployeeBenefitsCostChallenge.Domain.Common;
 
 namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
@@ -19,7 +16,5 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
         {
             return settingsRepository.DependentAnnualBenefitCost;
         }
-
-        [NotMapped] public override List<Dependent> Dependents { get; set; } = new List<Dependent>();
     }
 }

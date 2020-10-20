@@ -18,5 +18,9 @@ export class EmployeesComponent {
       
     }, error => this.errorMessage = "Unable To Retrieve Employees");
   }
+
+  getTotalCostSum() {
+    return this.employees.reduce((acc, val) => acc + val.totalBenefitCost.annualBenefitCost, 0)
+  }
 }
 

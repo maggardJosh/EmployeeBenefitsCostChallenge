@@ -24,11 +24,11 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
         public void AnnualBenefitCost_PersonWithNameStartingWithA_GetsDiscount()
         {
             //arrange
-            Person p = new Employee("Alphonso", "Miller");
+            Employee employee = new Employee("Alphonso", "Miller");
             BenefitCostService service = GetMockBenefitCostService();
 
             //act
-            decimal annualBenefitCost = service.GetBenefitCost(p).AnnualBenefitCost;
+            decimal annualBenefitCost = service.GetTotalBenefitCost(employee).AnnualBenefitCost;
 
             //assert
             annualBenefitCost.Should().Be(900);
@@ -38,11 +38,11 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
         public void AnnualBenefitCost_PersonWithNameNotStartingWithA_GetsStandardCost()
         {
             //arrange
-            Person p = new Employee("George", "Random");
+            Employee employee = new Employee("George", "Random");
             BenefitCostService service = GetMockBenefitCostService();
 
             //act
-            var annualBenefitCost = service.GetBenefitCost(p).AnnualBenefitCost;
+            var annualBenefitCost = service.GetTotalBenefitCost(employee).AnnualBenefitCost;
 
             //assert
             annualBenefitCost.Should().Be(1000);
@@ -58,7 +58,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
             BenefitCostService service = GetMockBenefitCostService();
 
             //act
-            var annualBenefitCost = service.GetBenefitCost(e).AnnualBenefitCost;
+            var annualBenefitCost = service.GetTotalBenefitCost(e).AnnualBenefitCost;
 
             //assert
             annualBenefitCost.Should().Be(1500);
@@ -68,14 +68,16 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
         public void PaycheckBenefitCost_StandardEmployee_ReturnsCorrectAmount()
         {
             //arrange
-            Person p = new Employee("George", "Random");
+            Employee employee = new Employee("George", "Random");
             BenefitCostService service = GetMockBenefitCostService();
 
             //act
-            var paycheckBenefitCost = service.GetBenefitCost(p).PaycheckBenefitCost;
+            var paycheckBenefitCost = service.GetTotalBenefitCost(employee).PaycheckBenefitCost;
 
             //assert
             paycheckBenefitCost.Should().Be(Math.Round(1000M/26, 2));
         }
+
+        //TODO: unit test covering GetIndividualBenefitCost
     }
 }

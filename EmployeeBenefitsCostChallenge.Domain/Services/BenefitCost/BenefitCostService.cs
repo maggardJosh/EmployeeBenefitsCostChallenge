@@ -15,15 +15,27 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
             _benefitCostSettingsRepository = benefitCostSettingsRepository;
             _benefitCostStrategyFactory = benefitCostStrategyFactory;
         }
-        public BenefitCostResult GetBenefitCost(Person p)
+        public BenefitCostResult GetTotalBenefitCost(Employee p)
+        {
+
+            decimal benefitCostResult = GetIndividualBenefitCost(p).AnnualBenefitCost;
+            decimal dependentAnnualCost = p.Dependents.Sum(dependent => GetIndividualBenefitCost(dependent).AnnualBenefitCost);
+
+            benefitCostResult += dependentAnnualCost;
+
+            return new BenefitCostResult
+            {
+                AnnualBenefitCost = benefitCostResult,
+                PaycheckBenefitCost = benefitCostResult / _benefitCostSettingsRepository.NumberOfPaychecksPerYear
+            };
+        }
+
+        public BenefitCostResult GetIndividualBenefitCost(Person p)
         {
             var benefitCostStrategy = _benefitCostStrategyFactory.GetStrategy(p);
             var standardAnnualBenefitCost = p.GetStandardAnnualBenefitCost(_benefitCostSettingsRepository);
 
             var benefitCostResult = benefitCostStrategy.GetBenefitCost(standardAnnualBenefitCost);
-            var dependentAnnualCost = p.Dependents.Sum(dependent => GetBenefitCost(dependent).AnnualBenefitCost);
-
-            benefitCostResult += dependentAnnualCost;
 
             return new BenefitCostResult
             {

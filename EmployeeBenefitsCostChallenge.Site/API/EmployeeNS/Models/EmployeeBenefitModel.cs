@@ -12,28 +12,31 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS.Models
             EmployeeID = employee.EmployeeID;
             FirstName = employee.FirstName;
             LastName = employee.LastName;
-            BenefitCost = benefitCostService.GetBenefitCost(employee);
+            IndividualBenefitCost = benefitCostService.GetIndividualBenefitCost(employee);
+            TotalBenefitCost = benefitCostService.GetTotalBenefitCost(employee);
 
             Dependents = employee.Dependents.Select(dependent => new DependentBenefitModel
             {
                 FirstName = dependent.FirstName,
                 LastName = dependent.LastName,
-                BenefitCost = benefitCostService.GetBenefitCost(dependent),
+                IndividualBenefitCost = benefitCostService.GetIndividualBenefitCost(dependent),
             }).ToList().AsReadOnly();
         }
+
 
         public int EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public IReadOnlyCollection<DependentBenefitModel> Dependents { get; set; }
 
-        public BenefitCostResult BenefitCost { get; set; }
+        public BenefitCostResult IndividualBenefitCost { get; set; }
+        public BenefitCostResult TotalBenefitCost { get; set; }
     }
 
     public class DependentBenefitModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public BenefitCostResult BenefitCost { get; set; }
+        public BenefitCostResult IndividualBenefitCost { get; set; }
     }
 }

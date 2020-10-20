@@ -18,7 +18,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
             return settingsRepository.StandardAnnualBenefitCost;
         }
 
-        public override List<Dependent> Dependents { get; set; } = new List<Dependent>();
+        public List<Dependent> Dependents { get; set; } = new List<Dependent>();
 
         public void AddDependent(Dependent dependent)
         {
