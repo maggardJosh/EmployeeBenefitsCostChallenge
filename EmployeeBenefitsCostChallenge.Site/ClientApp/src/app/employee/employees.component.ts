@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from "./models/Employee.model";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-employees',
@@ -10,13 +9,12 @@ import { Router } from "@angular/router";
 export class EmployeesComponent {
   employees: Employee[];
   errorMessage: string;
-  
-  constructor(http: HttpClient, private router: Router) {
-    
-    http.get<Employee[]>('api/employee').subscribe(result => {
-      this.employees = result;
-      
-    }, error => this.errorMessage = "Unable To Retrieve Employees");
+
+  constructor(http: HttpClient) {
+
+    http.get<Employee[]>('api/employee')
+      .subscribe(result => this.employees = result,
+                    () => this.errorMessage = "Unable To Retrieve Employees");
   }
 
   getTotalCostSum() {

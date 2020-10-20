@@ -40,7 +40,7 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
         {
             try
             {
-                _dbContext.Employees.Attach(newEmployee);
+                _dbContext.Employees.Add(newEmployee);
                 _dbContext.SaveChanges();
                 return OperationResult<Employee>.Ok(newEmployee);
             }

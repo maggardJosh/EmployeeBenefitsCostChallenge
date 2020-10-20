@@ -37,7 +37,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
             IBenefitCostStrategy benefitCostStrategy = _benefitCostStrategyFactory.GetStrategy(person);
             decimal standardAnnualBenefitCost = person.GetStandardAnnualBenefitCost(_benefitCostSettingsRepository);
 
-            decimal benefitCostResult = benefitCostStrategy.GetBenefitCost(standardAnnualBenefitCost);
+            decimal benefitCostResult = benefitCostStrategy.GetAnnualBenefitCost(standardAnnualBenefitCost);
 
             return new BenefitCostResult
             {

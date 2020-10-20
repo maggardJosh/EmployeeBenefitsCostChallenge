@@ -5,9 +5,7 @@ import { Router } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { Location } from "@angular/common";
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let component: EmployeesEditComponent;
 let fixture: ComponentFixture<EmployeesEditComponent>;
@@ -15,14 +13,15 @@ let fixture: ComponentFixture<EmployeesEditComponent>;
 import { routes } from "../router";
 import { EmployeesEditComponent } from "./employees-edit.component";
 import { Employee, Dependent } from "./models/Employee.model";
+
 describe("employees-edit",
   () => {
 
-
-    let router;
-    let location;
+    let router: Router;
+    let location: Location;
 
     beforeEach(() => {
+
       TestBed.configureTestingModule({
         imports: [
           RouterTestingModule.withRoutes(routes),
@@ -33,6 +32,7 @@ describe("employees-edit",
         ],
         declarations: [EmployeesComponent, EmployeesEditComponent]
       });
+
       router = TestBed.get(Router);
       location = TestBed.get(Location);
       fixture = TestBed.createComponent(EmployeesEditComponent);
@@ -52,49 +52,15 @@ describe("employees-edit",
       fakeAsync(() => {
         component.loaded = true;
         fixture.detectChanges();
+
         const cancelButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#cancelButton');
         cancelButton.click();
         tick();
+
         expect(location.path()).toBe('/employees');
       }));
-    it('invalid form clicking save should do nothing',
-      fakeAsync(() => {
-        spyOn(component, 'onSubmit');
-        component.loaded = true;
-        fixture.detectChanges();
-        const saveButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#saveButton');
-        saveButton.click();
-        expect(component.onSubmit).not.toHaveBeenCalled();
-      }));
 
-    it('click add dependent adds dependent',
-      fakeAsync(() => {
-        component.loaded = true;
-        fixture.detectChanges();
-        const addDependentButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#addDependentButton');
-        addDependentButton.click();
-        tick();
-        expect(component.dependents.length).toBe(1);
-      }));
-
-    it('click remove dependent removes dependent',
-      fakeAsync(() => {
-        component.loaded = true;
-        let employee: Employee = new Employee();
-        employee.firstName = "First";
-        employee.lastName = "Last";
-        employee.dependents = [
-          new Dependent()
-        ];
-        component.employeeForm = component.buildForm(employee);
-        fixture.detectChanges();
-        const removeDependentButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#removeDependentButton');
-        removeDependentButton.click();
-        tick();
-        expect(component.dependents.length).toBe(0);
-      }));
-
-    it('Valid form clicking save should call onSubmit',
+    it('valid form clicking save should call onSubmit',
       fakeAsync(() => {
         spyOn(component, 'onSubmit');
 
@@ -111,6 +77,49 @@ describe("employees-edit",
         expect(component.onSubmit).toHaveBeenCalled();
       }));
 
+    it('invalid form clicking save should do nothing',
+      fakeAsync(() => {
+        spyOn(component, 'onSubmit');
+        component.loaded = true;
+
+        fixture.detectChanges();
+        const saveButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#saveButton');
+
+        saveButton.click();
+        expect(component.onSubmit).not.toHaveBeenCalled();
+      }));
+
+    it('click add dependent adds dependent',
+      fakeAsync(() => {
+        component.loaded = true;
+        fixture.detectChanges();
+
+        const addDependentButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#addDependentButton');
+        addDependentButton.click();
+        tick();
+
+        expect(component.dependents.length).toBe(1);
+      }));
+
+    it('click remove dependent removes dependent',
+      fakeAsync(() => {
+        component.loaded = true;
+        let employee: Employee = new Employee();
+        employee.firstName = "First";
+        employee.lastName = "Last";
+        employee.dependents = [
+          new Dependent()
+        ];
+        component.employeeForm = component.buildForm(employee);
+        fixture.detectChanges();
+
+        const removeDependentButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#removeDependentButton');
+        removeDependentButton.click();
+        tick();
+
+        expect(component.dependents.length).toBe(0);
+      }));
+
     it('click delete should call deleteEmployee',
       fakeAsync(() => {
         spyOn(component, "deleteEmployee");
@@ -123,9 +132,11 @@ describe("employees-edit",
           new Dependent()
         ];
         component.employeeForm = component.buildForm(employee);
+
         fixture.detectChanges();
         const deleteEmployeeButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#deleteButton');
         deleteEmployeeButton.click();
+
         expect(component.deleteEmployee).toHaveBeenCalled();
 
       }));
@@ -141,8 +152,10 @@ describe("employees-edit",
           new Dependent()
         ];
         component.employeeForm = component.buildForm(employee);
+
         fixture.detectChanges();
         const deleteEmployeeButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#deleteButton');
+
         expect(deleteEmployeeButton).toBeNull();
 
       }));

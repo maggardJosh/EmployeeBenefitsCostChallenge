@@ -14,7 +14,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
             _discountMultiplier = 1 - (discountPercent / 100.0M);
         }
 
-        public decimal GetBenefitCost(decimal standardAnnualCost)
+        public decimal GetAnnualBenefitCost(decimal standardAnnualCost)
         {
             return standardAnnualCost * _discountMultiplier;
         }

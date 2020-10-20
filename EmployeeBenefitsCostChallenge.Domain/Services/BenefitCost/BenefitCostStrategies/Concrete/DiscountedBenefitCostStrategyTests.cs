@@ -12,13 +12,13 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
         [InlineData(10, 1000, 900)]
         [InlineData(50, 10000, 5000)]
         [InlineData(90, 1000, 100)]
-        public void GetBenefitCost_GivenDiscount_AppliesCorrectly(decimal discountAmount, decimal standardCost, decimal expectedResult)
+        public void GetAnnualBenefitCost_GivenDiscount_AppliesCorrectly(decimal discountAmount, decimal standardCost, decimal expectedResult)
         {
             //Arrange
             var costStrategy = new DiscountedBenefitCostStrategy(discountAmount);
 
             //Act
-            var result = costStrategy.GetBenefitCost(standardCost);
+            var result = costStrategy.GetAnnualBenefitCost(standardCost);
 
             //Assert
             result.Should().Be(expectedResult);

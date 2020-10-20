@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee, Dependent } from "./models/Employee.model";
 
@@ -52,32 +52,28 @@ export class EmployeesEditComponent {
     }
 
     this.http.get<Employee>('api/employee/' + id).subscribe(result => {
-        this.employeeForm = this.buildForm(result);
-        this.loaded = true;
-      },
+      this.employeeForm = this.buildForm(result);
+      this.loaded = true;
+    },
       () => { this.errorMessage = "Error retrieving employee information" }
-  );
+    );
 
 
   }
 
   onSubmit() {
-    
+
     if (!this.isEdit) {
       this.http.post<Employee>('api/employee/', this.employeeForm.value)
-        .subscribe(result => {
-            this.navigateHome();
-            return;
-          },
-          () => this.errorMessage = "Unable to add employee");
+        .subscribe(() => this.navigateHome(),
+                    () => this.errorMessage = "Unable to add employee");
       return;
     }
 
     const id = this.route.snapshot.params['id'];
     this.http.put<Employee>('api/employee/' + id, this.employeeForm.value)
-      .subscribe(result => {
-        this.navigateHome();
-      }, () => this.errorMessage = "Unable to update employee");
+      .subscribe(() => this.navigateHome(),
+                  () => this.errorMessage = "Unable to update employee");
   }
 
   navigateHome() {
@@ -95,9 +91,7 @@ export class EmployeesEditComponent {
   deleteEmployee() {
     const id = this.route.snapshot.params['id'];
     this.http.delete('api/employee/' + id)
-      .subscribe(result => {
-          this.navigateHome();
-        },
-        () => this.errorMessage = "Unable to delete employee");
+      .subscribe(() => this.navigateHome(),
+                  () => this.errorMessage = "Unable to delete employee");
   }
 }

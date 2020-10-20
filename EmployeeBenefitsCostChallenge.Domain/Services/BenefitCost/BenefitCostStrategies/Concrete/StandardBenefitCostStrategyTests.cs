@@ -13,7 +13,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
             decimal standardCost = 1000;
 
             //act
-            var result = costStrategy.GetBenefitCost(standardCost);
+            var result = costStrategy.GetAnnualBenefitCost(standardCost);
 
             //assert
             result.Should().Be(standardCost);

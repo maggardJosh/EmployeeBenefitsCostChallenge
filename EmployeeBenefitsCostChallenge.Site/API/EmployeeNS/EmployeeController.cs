@@ -29,7 +29,7 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS
         }
 
         [HttpGet]
-        public ActionResult RetrieveAllEmployeeData()
+        public ActionResult GetAllEmployeeData()
         {
             try
             {
@@ -47,7 +47,7 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS
         }
 
         [HttpGet("{id}", Name = "GetEmployeeRoute")]
-        public ActionResult GetEmployeeByID(int id)
+        public ActionResult GetEmployee(int id)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Employee newEmployee)
+        public ActionResult AddEmployee([FromBody] Employee newEmployee)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateCustomer(int id, [FromBody] Employee employeeData)
+        public ActionResult UpdateEmployee(int id, [FromBody] Employee employeeData)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteEmployee(int id)
         {
             try
             {

@@ -17,19 +17,28 @@ import { Employee } from "./models/Employee.model";
 
 describe("employees",
   () => {
-    let router;
-    let location;
+
+    let router: Router;
+    let location: Location;
+
     beforeEach(() => {
+
       TestBed.configureTestingModule({
         imports: [
-          RouterTestingModule.withRoutes(routes), FormsModule, NgbModule, ReactiveFormsModule, HttpClientTestingModule
+          RouterTestingModule.withRoutes(routes),
+          FormsModule,
+          NgbModule,
+          ReactiveFormsModule,
+          HttpClientTestingModule
         ],
         declarations: [EmployeesComponent, EmployeesEditComponent]
       });
+
       router = TestBed.get(Router);
       location = TestBed.get(Location);
       fixture = TestBed.createComponent(EmployeesComponent);
       component = fixture.componentInstance;
+
       router.initialNavigation();
       fixture.detectChanges();
     });
@@ -56,6 +65,7 @@ describe("employees",
         e.employeeID = 2;
         component.employees = [e];
         fixture.detectChanges();
+
         const editButton: HTMLAnchorElement = fixture.nativeElement.querySelector('#editButton');
         editButton.click();
         tick();

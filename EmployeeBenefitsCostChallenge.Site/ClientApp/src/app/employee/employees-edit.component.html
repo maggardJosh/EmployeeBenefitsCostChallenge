@@ -32,7 +32,7 @@
       <div class="form-group mt-5">
         <button id="deleteButton" type="button" class="btn btn-danger " *ngIf="isEdit" (click)="deleteEmployee()">Delete</button>
         <button id="cancelButton" type="button" class="btn btn-secondary float-right mx-2" (click)="navigateHome()">Cancel</button>
-        <button id="saveButton"type="button" class="btn btn-success float-right" [disabled]="!employeeForm.valid" (click)="onSubmit()">Save</button>
+        <button id="saveButton" type="button" class="btn btn-success float-right" [disabled]="!employeeForm.valid" (click)="onSubmit()">Save</button>
       </div>
     </div>
   </div>

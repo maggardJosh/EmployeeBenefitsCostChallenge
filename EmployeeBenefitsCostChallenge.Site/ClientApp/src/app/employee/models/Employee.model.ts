@@ -4,9 +4,9 @@ export class Employee {
   employeeID: number = 0;
   firstName: string = '';
   lastName: string = '';
+  dependents: Dependent[] = [];
   individualBenefitCost: BenefitCost = new BenefitCost();
   totalBenefitCost: BenefitCost = new BenefitCost();
-  dependents: Dependent[] = [];
 }
 
 export class Dependent {
