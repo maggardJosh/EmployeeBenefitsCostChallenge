@@ -21,18 +21,18 @@
           <div *ngFor="let control of dependents.controls; index as i" formGroupName="{{i}}" class="row form-group">
             <input class="col-md-4 ml-1 my-1" [ngClass]="{'alert-danger': control.get('firstName').invalid && !control.get('firstName').untouched}" placeholder="First Name" formControlName="firstName" />
             <input class="col-md-4 ml-1 my-1" [ngClass]="{'alert-danger': control.get('lastName').invalid && !control.get('lastName').untouched}" placeholder="Last Name" formControlName="lastName" />
-            <button type="button" class="btn btn-sm btn-danger col-md-2 ml-1 my-1" (click)="removeDependent(i)">Remove</button>
+            <button id="removeDependentButton" type="button" class="btn btn-sm btn-danger col-md-2 ml-1 my-1" (click)="removeDependent(i)">Remove</button>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-primary" (click)="addDependent()">Add Dependent</button>
+        <button id="addDependentButton" type="button" class="btn btn-primary" (click)="addDependent()">Add Dependent</button>
       </div>
 
       <div class="form-group mt-5">
-        <button type="button" class="btn btn-danger " *ngIf="isEdit" (click)="deleteEmployee()">Delete</button>
-        <button type="button" class="btn btn-secondary float-right mx-2" (click)="navigateHome()">Cancel</button>
-        <button type="button" class="btn btn-success float-right" [disabled]="!employeeForm.valid" (click)="onSubmit()">Save</button>
+        <button id="deleteButton" type="button" class="btn btn-danger " *ngIf="isEdit" (click)="deleteEmployee()">Delete</button>
+        <button id="cancelButton" type="button" class="btn btn-secondary float-right mx-2" (click)="navigateHome()">Cancel</button>
+        <button id="saveButton"type="button" class="btn btn-success float-right" [disabled]="!employeeForm.valid" (click)="onSubmit()">Save</button>
       </div>
     </div>
   </div>
