@@ -51,7 +51,7 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS
         {
             try
             {
-                var employeeOperation = _employeeRepository.GetEmployeeByID(id);
+                OperationResult<Employee> employeeOperation = _employeeRepository.GetEmployeeByID(id);
                 if (!employeeOperation.Success)
                     return BadRequest();
 
@@ -67,33 +67,57 @@ namespace EmployeeBenefitsCostChallenge.API.EmployeeNS
         [HttpPost]
         public ActionResult Post([FromBody] Employee newEmployee)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
 
-            _employeeRepository.AddEmployee(newEmployee);
-            return CreatedAtRoute("GetEmployeeRoute", new { id = newEmployee.EmployeeID }, newEmployee);
+                _employeeRepository.AddEmployee(newEmployee);
+                return CreatedAtRoute("GetEmployeeRoute", new { id = newEmployee.EmployeeID }, newEmployee);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding new employee data");
+                return BadRequest();
+            }
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateCustomer(int id, [FromBody] Employee employeeData)
         {
-            if (!ModelState.IsValid)
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+
+                var updateEmployeeOperation = _employeeRepository.UpdateEmployee(employeeData);
+                if (!updateEmployeeOperation.Success)
+                    return BadRequest(updateEmployeeOperation.Message);
+
+                return AcceptedAtRoute("GetEmployeeRoute", new { id = id }, updateEmployeeOperation.Result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating employee data");
                 return BadRequest();
-
-            var updateEmployeeOperation = _employeeRepository.UpdateEmployee(employeeData);
-            if (!updateEmployeeOperation.Success)
-                return BadRequest(updateEmployeeOperation.Message);
-
-            return AcceptedAtRoute("GetEmployeeRoute", new { id = id }, updateEmployeeOperation.Result);
+            }
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            OperationResult deleteOperation = _employeeRepository.DeleteEmployee(id);
-            if (!deleteOperation.Success)
-                return BadRequest(deleteOperation.Message);
-            return Accepted();
+            try
+            {
+                OperationResult deleteOperation = _employeeRepository.DeleteEmployee(id);
+                if (!deleteOperation.Success)
+                    return BadRequest(deleteOperation.Message);
+                return Accepted();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting employee data");
+                return BadRequest();
+            }
         }
     }
 }

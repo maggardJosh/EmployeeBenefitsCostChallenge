@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
-using EmployeeBenefitsCostChallenge.Persistence.Repositories;
 using Microsoft.Extensions.Logging;
 
-namespace EmployeeBenefitsCostChallenge.Persistence
+namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
 {
     public class BenefitCostSettingsRepository : IBenefitCostSettingsRepository
     {
@@ -83,16 +82,15 @@ namespace EmployeeBenefitsCostChallenge.Persistence
             }
         }
 
-        //TODO: Ideally would find solution using generics to remove duplicate code
         private decimal RetrieveDecimalApplicationSetting(string settingName)
         {
-            var result = _dbContext.ApplicationSettings
+            string rawValue = _dbContext.ApplicationSettings
                 .FirstOrDefault(setting => setting.Name == settingName)?.Value;
 
-            if (result == null)
+            if (rawValue == null)
                 throw new Exception("Missing Application Setting for " + settingName);
 
-            if (!decimal.TryParse(result, out decimal parsedValue))
+            if (!decimal.TryParse(rawValue, out decimal parsedValue))
                 throw new Exception(
                     $"Application Setting for {settingName} configured incorrectly");
 
@@ -101,13 +99,13 @@ namespace EmployeeBenefitsCostChallenge.Persistence
 
         private int RetrieveIntegerApplicationSetting(string settingName)
         {
-            var result = _dbContext.ApplicationSettings
+            string rawValue = _dbContext.ApplicationSettings
                 .FirstOrDefault(setting => setting.Name == settingName)?.Value;
 
-            if (result == null)
+            if (rawValue == null)
                 throw new Exception("Missing Application Setting for " + settingName);
 
-            if (!int.TryParse(result, out int parsedValue))
+            if (!int.TryParse(rawValue, out int parsedValue))
                 throw new Exception(
                     $"Application Setting for {settingName} configured incorrectly");
 

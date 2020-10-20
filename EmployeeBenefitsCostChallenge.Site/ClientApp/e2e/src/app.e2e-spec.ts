@@ -1,4 +1,6 @@
 import { AppPage } from './app.po';
+import { browser, by,  protractor } from 'protractor';
+
 
 describe('App', () => {
   let page: AppPage;
@@ -9,6 +11,7 @@ describe('App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getMainHeading()).toEqual('Hello, world!');
+    expect(page.getMainHeading()).toEqual('Employees');
   });
+
 });

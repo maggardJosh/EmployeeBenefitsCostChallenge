@@ -1,4 +1,5 @@
 ﻿using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+using EmployeeBenefitsCostChallenge.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeBenefitsCostChallenge.Persistence

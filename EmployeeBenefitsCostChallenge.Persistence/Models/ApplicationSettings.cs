@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmployeeBenefitsCostChallenge.Persistence
+namespace EmployeeBenefitsCostChallenge.Persistence.Models
 {
     public class ApplicationSettings
     {

@@ -34,7 +34,8 @@ export class EmployeesEditComponent {
 
   buildDependentForm(d: Dependent): FormGroup {
     return this.fb.group({
-       firstName: [d.firstName, Validators.required], lastName: [d.lastName, Validators.required]
+      firstName: [d.firstName, Validators.required],
+      lastName: [d.lastName, Validators.required]
     });
   }
 
@@ -51,7 +52,6 @@ export class EmployeesEditComponent {
     }
 
     this.http.get<Employee>('api/employee/' + id).subscribe(result => {
-        //TODO: extract this to data retrieval service
         this.employeeForm = this.buildForm(result);
         this.loaded = true;
       },
@@ -69,7 +69,7 @@ export class EmployeesEditComponent {
             this.navigateHome();
             return;
           },
-          error => console.error(error));
+          () => this.errorMessage = "Unable to add employee");
       return;
     }
 
@@ -77,9 +77,7 @@ export class EmployeesEditComponent {
     this.http.put<Employee>('api/employee/' + id, this.employeeForm.value)
       .subscribe(result => {
         this.navigateHome();
-      }, error => console.error(error));
-    //TODO: Better error handling
-
+      }, () => this.errorMessage = "Unable to update employee");
   }
 
   navigateHome() {
@@ -98,7 +96,8 @@ export class EmployeesEditComponent {
     const id = this.route.snapshot.params['id'];
     this.http.delete('api/employee/' + id)
       .subscribe(result => {
-        this.navigateHome();
-      }, error => console.error(error));
+          this.navigateHome();
+        },
+        () => this.errorMessage = "Unable to delete employee");
   }
 }
