@@ -1,7 +1,9 @@
 ﻿using System.Linq;
-using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate.Abstract;
+using EmployeeBenefitsCostChallenge.Domain.Repositories;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.Models;
 
 namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
 {
@@ -15,27 +17,27 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
             _benefitCostSettingsRepository = benefitCostSettingsRepository;
             _benefitCostStrategyFactory = benefitCostStrategyFactory;
         }
-        public BenefitCostResult GetTotalBenefitCost(Employee p)
+        public BenefitCostResult GetTotalBenefitCost(Employee employee)
         {
+            decimal employeeAnnualCost = GetIndividualBenefitCost(employee).AnnualBenefitCost;
 
-            decimal benefitCostResult = GetIndividualBenefitCost(p).AnnualBenefitCost;
-            decimal dependentAnnualCost = p.Dependents.Sum(dependent => GetIndividualBenefitCost(dependent).AnnualBenefitCost);
+            decimal totalDependentAnnualCost = employee.Dependents.Sum(dependent => GetIndividualBenefitCost(dependent).AnnualBenefitCost);
 
-            benefitCostResult += dependentAnnualCost;
+            decimal totalAnnualBenefitCost = employeeAnnualCost + totalDependentAnnualCost;
 
             return new BenefitCostResult
             {
-                AnnualBenefitCost = benefitCostResult,
-                PaycheckBenefitCost = benefitCostResult / _benefitCostSettingsRepository.NumberOfPaychecksPerYear
+                AnnualBenefitCost = totalAnnualBenefitCost,
+                PaycheckBenefitCost = totalAnnualBenefitCost / _benefitCostSettingsRepository.NumberOfPaychecksPerYear
             };
         }
 
-        public BenefitCostResult GetIndividualBenefitCost(Person p)
+        public BenefitCostResult GetIndividualBenefitCost(Person person)
         {
-            var benefitCostStrategy = _benefitCostStrategyFactory.GetStrategy(p);
-            var standardAnnualBenefitCost = p.GetStandardAnnualBenefitCost(_benefitCostSettingsRepository);
+            IBenefitCostStrategy benefitCostStrategy = _benefitCostStrategyFactory.GetStrategy(person);
+            decimal standardAnnualBenefitCost = person.GetStandardAnnualBenefitCost(_benefitCostSettingsRepository);
 
-            var benefitCostResult = benefitCostStrategy.GetBenefitCost(standardAnnualBenefitCost);
+            decimal benefitCostResult = benefitCostStrategy.GetBenefitCost(standardAnnualBenefitCost);
 
             return new BenefitCostResult
             {

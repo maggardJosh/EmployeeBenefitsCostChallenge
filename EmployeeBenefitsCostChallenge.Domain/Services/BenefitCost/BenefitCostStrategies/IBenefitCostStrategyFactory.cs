@@ -1,4 +1,4 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+﻿using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate.Abstract;
 
 namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies
 {

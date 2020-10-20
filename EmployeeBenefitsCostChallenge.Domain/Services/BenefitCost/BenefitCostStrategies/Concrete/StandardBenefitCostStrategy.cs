@@ -2,9 +2,9 @@
 {
     internal class StandardBenefitCostStrategy : IBenefitCostStrategy
     {
-        public decimal GetBenefitCost(decimal annualCost)
+        public decimal GetBenefitCost(decimal standardAnnualCost)
         {
-            return annualCost;
+            return standardAnnualCost;
         }
     }
 }

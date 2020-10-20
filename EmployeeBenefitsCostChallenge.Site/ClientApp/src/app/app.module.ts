@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -27,7 +27,7 @@ import { EmployeesEditComponent } from "./employee/employees-edit.component";
     RouterModule.forRoot([
       { path: 'employees', component: EmployeesComponent, pathMatch: 'full' },
       { path: 'employees/:id', component: EmployeesEditComponent },
-      {path: '**', pathMatch: 'full', redirectTo: '/employees' }
+      { path: '**', pathMatch: 'full', redirectTo: '/employees' }
     ])
   ],
   providers: [],

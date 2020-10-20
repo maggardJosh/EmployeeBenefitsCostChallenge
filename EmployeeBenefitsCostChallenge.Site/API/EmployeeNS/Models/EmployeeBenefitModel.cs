@@ -2,6 +2,7 @@
 using System.Linq;
 using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost;
+using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.Models;
 
 namespace EmployeeBenefitsCostChallenge.API.EmployeeNS.Models
 {

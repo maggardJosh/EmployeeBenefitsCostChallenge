@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
+namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.Models
 {
     public class BenefitCostResult
     {

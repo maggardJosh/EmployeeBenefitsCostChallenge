@@ -1,5 +1,5 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Common;
-using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+﻿using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
+using EmployeeBenefitsCostChallenge.Domain.Repositories;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies.Concrete;
 using FluentAssertions;
 using Moq;
@@ -15,6 +15,19 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
             //arrange
             var factory = new BenefitCostStrategyFactory(Mock.Of<IBenefitCostSettingsRepository>());
             var person = new Employee("Alice", "Something");
+            //act
+            var strategy = factory.GetStrategy(person);
+
+            //assert
+            strategy.Should().BeOfType<DiscountedBenefitCostStrategy>();
+        }
+
+        [Fact]
+        public void GetStrategy_GivenNameStartingWithLowercaseA_ShouldReturnDiscountStrategy()
+        {
+            //arrange
+            var factory = new BenefitCostStrategyFactory(Mock.Of<IBenefitCostSettingsRepository>());
+            var person = new Employee("alice", "Something");
             //act
             var strategy = factory.GetStrategy(person);
 

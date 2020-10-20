@@ -1,4 +1,5 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Common;
+﻿using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate.Abstract;
+using EmployeeBenefitsCostChallenge.Domain.Repositories;
 
 namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
@@ -7,11 +8,8 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
         public int ID { get; set; }
 
         public Dependent() { }
-        public Dependent(string firstName, string lastName) : base(firstName, lastName)
-        {
-        }
+        public Dependent(string firstName, string lastName) : base(firstName, lastName) { }
 
-        //TODO: Potentially cover this function in tests
         public override decimal GetStandardAnnualBenefitCost(IBenefitCostSettingsRepository settingsRepository)
         {
             return settingsRepository.DependentAnnualBenefitCost;

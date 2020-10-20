@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using EmployeeBenefitsCostChallenge.Domain.Common;
+using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate.Abstract;
+using EmployeeBenefitsCostChallenge.Domain.Repositories;
 
 namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 {
@@ -8,11 +9,8 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
         public int EmployeeID { get; set; }
 
         public Employee() { }
-        public Employee(string firstName, string lastName) : base(firstName, lastName)
-        {
-        }
+        public Employee(string firstName, string lastName) : base(firstName, lastName) { }
 
-        //TODO: Potentially cover this function in tests
         public override decimal GetStandardAnnualBenefitCost(IBenefitCostSettingsRepository settingsRepository)
         {
             return settingsRepository.StandardAnnualBenefitCost;
@@ -22,6 +20,8 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 
         public void AddDependent(Dependent dependent)
         {
+            if (Dependents.Contains(dependent))
+                return;
             Dependents.Add(dependent);
         }
 

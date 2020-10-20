@@ -1,19 +1,19 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Common;
+﻿using EmployeeBenefitsCostChallenge.Domain.Repositories;
 
-namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
+namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate.Abstract
 {
     public abstract class Person
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public abstract decimal GetStandardAnnualBenefitCost(IBenefitCostSettingsRepository settingsRepository);
-        
-        public Person() { }
+        protected Person() { }
         protected Person(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
         }
+
+        public abstract decimal GetStandardAnnualBenefitCost(IBenefitCostSettingsRepository settingsRepository);
     }
 }

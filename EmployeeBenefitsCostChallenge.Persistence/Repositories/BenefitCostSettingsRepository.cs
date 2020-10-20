@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Linq;
-using EmployeeBenefitsCostChallenge.Domain.Common;
+using EmployeeBenefitsCostChallenge.Domain.Repositories;
 using EmployeeBenefitsCostChallenge.Persistence.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace EmployeeBenefitsCostChallenge.Persistence
 {
-    public class BenefitCostSettingsRepositoryRepository : IBenefitCostSettingsRepository
+    public class BenefitCostSettingsRepository : IBenefitCostSettingsRepository
     {
         private readonly DatabaseContext _dbContext;
-        private readonly ILogger<BenefitCostSettingsRepositoryRepository> _logger;
+        private readonly ILogger<BenefitCostSettingsRepository> _logger;
         private readonly DefaultLocalBenefitCostSettingsRepository _defaultBenefitCostSettingsRepository = new DefaultLocalBenefitCostSettingsRepository();
 
-        public BenefitCostSettingsRepositoryRepository(DatabaseContext dbContext, ILogger<BenefitCostSettingsRepositoryRepository> logger)
+        public BenefitCostSettingsRepository(DatabaseContext dbContext, ILogger<BenefitCostSettingsRepository> logger)
         {
             _dbContext = dbContext;
             _logger = logger;

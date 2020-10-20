@@ -1,4 +1,3 @@
-using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Repositories;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
@@ -12,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using ILoggerFactory = Castle.Core.Logging.ILoggerFactory;
 
 namespace EmployeeBenefitsCostChallenge
 {
@@ -30,21 +28,21 @@ namespace EmployeeBenefitsCostChallenge
             services.AddControllersWithViews();
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddTransient<IBenefitCostSettingsRepository, BenefitCostSettingsRepositoryRepository>();
+            services.AddTransient<IBenefitCostSettingsRepository, BenefitCostSettingsRepository>();
 
             services.AddScoped<IBenefitCostService, BenefitCostService>();
             services.AddScoped<IBenefitCostStrategyFactory, BenefitCostStrategyFactory>();
 
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                    .UseLoggerFactory(MyLoggerFactory));
+                    .UseLoggerFactory(ConsoleLoggerFactory));
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
         }
-        public static readonly Microsoft.Extensions.Logging.ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
+        public static readonly Microsoft.Extensions.Logging.ILoggerFactory ConsoleLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

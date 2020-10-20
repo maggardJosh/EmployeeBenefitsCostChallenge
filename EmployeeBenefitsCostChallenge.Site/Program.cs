@@ -1,5 +1,4 @@
 using System;
-using Castle.Core.Logging;
 using EmployeeBenefitsCostChallenge.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;

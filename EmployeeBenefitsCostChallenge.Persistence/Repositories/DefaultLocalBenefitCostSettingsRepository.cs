@@ -1,4 +1,4 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Common;
+﻿using EmployeeBenefitsCostChallenge.Domain.Repositories;
 
 namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
 {

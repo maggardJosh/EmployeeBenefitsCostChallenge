@@ -12,7 +12,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
         [InlineData(10, 1000, 900)]
         [InlineData(50, 10000, 5000)]
         [InlineData(90, 1000, 100)]
-        public void Discount_GivenDiscount_AppliesCorrectly(decimal discountAmount, decimal standardCost, decimal expectedResult)
+        public void GetBenefitCost_GivenDiscount_AppliesCorrectly(decimal discountAmount, decimal standardCost, decimal expectedResult)
         {
             //Arrange
             var costStrategy = new DiscountedBenefitCostStrategy(discountAmount);
@@ -27,7 +27,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostS
         [Theory]
         [InlineData(-1)]
         [InlineData(101)]
-        public void Discount_GivenInvalidDiscount_ThrowsException(decimal discountAmount)
+        public void DiscountStrategy_GivenInvalidDiscount_ThrowsException(decimal discountAmount)
         {
             //arrange
             //act
