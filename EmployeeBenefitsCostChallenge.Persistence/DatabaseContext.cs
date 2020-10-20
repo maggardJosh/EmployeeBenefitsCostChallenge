@@ -13,6 +13,12 @@ namespace EmployeeBenefitsCostChallenge.Persistence
         public DbSet<Employee> Employees { get; set; }
         public DbSet<ApplicationSettings> ApplicationSettings { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().ToTable("Employee").HasMany(e => e.Dependents).WithOne().OnDelete(DeleteBehavior.Cascade);

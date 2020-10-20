@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using ILoggerFactory = Castle.Core.Logging.ILoggerFactory;
 
 namespace EmployeeBenefitsCostChallenge
 {
@@ -33,14 +35,16 @@ namespace EmployeeBenefitsCostChallenge
             services.AddScoped<IBenefitCostService, BenefitCostService>();
             services.AddScoped<IBenefitCostStrategyFactory, BenefitCostStrategyFactory>();
 
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    .UseLoggerFactory(MyLoggerFactory));
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
         }
-
+        public static readonly Microsoft.Extensions.Logging.ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

@@ -8,17 +8,15 @@ import { Router } from "@angular/router";
   templateUrl: './employees.component.html'
 })
 export class EmployeesComponent {
-  public employees: Employee[];
+  employees: Employee[];
+  errorMessage: string;
   
   constructor(http: HttpClient, private router: Router) {
+    
     http.get<Employee[]>('api/employee').subscribe(result => {
       this.employees = result;
-      console.log(result);
-    }, error => console.error(error));
-  }
-
-  navigateToAdd() {
-    this.router.navigateByUrl('employees/0');
+      
+    }, error => this.errorMessage = "Unable To Retrieve Employees");
   }
 }
 

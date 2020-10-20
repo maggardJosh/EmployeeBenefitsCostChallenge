@@ -10,8 +10,9 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
 
         public abstract decimal GetStandardAnnualBenefitCost(IBenefitCostSettingsRepository settingsRepository);
 
-        public abstract IReadOnlyList<Dependent> Dependents { get; }
+        public abstract List<Dependent> Dependents { get; set; }
 
+        public Person() { }
         protected Person(string firstName, string lastName)
         {
             FirstName = firstName;

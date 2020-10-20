@@ -1,29 +1,37 @@
-<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-  <div *ngIf="!loaded">Loading...</div>
-  <div *ngIf="loaded">
-    <button type="button" class="btn-danger" *ngIf="isEdit" (click)="deleteEmployee()">Delete</button>
-    <h2>Employee Information</h2>
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input type="text" class="form-control" formControlName="firstName"/>
-    </div>
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" formControlName="lastName"/>
-    </div>
-    <h3>Dependents</h3>
-    <div *ngIf="dependents.controls.length" formArrayName="dependents" class="form-group">
-      <div *ngFor="let control of dependents.controls; index as i" formGroupName="{{i}}" class="form-group">
-        <!--todo: change this to a table, get post working for this form :D-->
-        <button type="button" class="btn-danger" (click)="removeDependent(i)">Remove</button>
-        <input placeholder="First Name" formControlName="firstName"/>
-        <input placeholder="Last Name" formControlName="lastName"/>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="container">
+  <div class="row mb-3">
+    <div class="col-md-8 offset-md-2"><h2>Employee Information</h2></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 offset-md-4" *ngIf="!loaded">Loading...</div>
+    <div class="col-md-8 offset-md-2" *ngIf="loaded">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" formControlName="firstName" />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName" />
+      </div>
+      <div class="container mt-4">
+        <h4>Dependents</h4>
+        <div *ngIf="dependents.controls.length" formArrayName="dependents" class="form-group">
+          <div *ngFor="let control of dependents.controls; index as i" formGroupName="{{i}}" class="row form-group">
+            <input class="col-md-4 ml-1 my-1" placeholder="First Name" formControlName="firstName" />
+            <input class="col-md-4 ml-1 my-1" placeholder="Last Name" formControlName="lastName" />
+            <button type="button" class="btn btn-sm btn-danger col-md-2 ml-1 my-1" (click)="removeDependent(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="addDependent()">Add Dependent</button>
+      </div>
+
+      <div class="form-group mt-5">
+        <button type="button" class="btn btn-danger " *ngIf="isEdit" (click)="deleteEmployee()">Delete</button>
+        <button type="button" class="btn btn-secondary float-right mx-2" (click)="navigateHome()">Cancel</button>
+        <button type="button" class="btn btn-success float-right" (click)="onSubmit()">Save</button>
       </div>
     </div>
-    <div class="form-group">
-      <button type="button" class="btn-success" (click)="addDependent()">Add Dependent</button>
-    </div>
-    <button type="button" class="btn-secondary" (click)="navigateHome()">Cancel</button>
-    <button type="button" class="btn-primary" (click)="onSubmit()">Save</button>
   </div>
 </form>

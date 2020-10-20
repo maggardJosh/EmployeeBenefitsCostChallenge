@@ -1,34 +1,49 @@
-<h1 id="tableLabel">Employees</h1>
+<div container>
+  <div class="page-header">
+    <h1 id="tableLabel">Employees</h1>
+  </div>
 
-<p *ngIf="!employees"><em>Loading Employee Information...</em></p>
-<div *ngIf="employees">
-  <button type="button" class ="btn btn-success" (click)="navigateToAdd()">Add Employee</button>
-  <table class='table table-striped' aria-labelledby="tableLabel">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Dependent Information</th>
-      <th>Total Annual Cost</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let employee of employees">
-      <td><a [routerLink]="['/employees', employee.id]">{{ employee.firstName }} {{ employee.lastName }}</a></td>
-      <td>
-        <div *ngIf="!employee.dependents.length">No Dependents</div>
-        <div *ngFor="let dependent of employee.dependents">
-          {{ dependent.firstName }} {{dependent.lastName }} -
-          <span placement="top" ngbTooltip="({{dependent.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
-            {{dependent.benefitCost.annualBenefitCost | currency}}
-          </span>
+  <p *ngIf="!employees"><em>Loading Employee Information...</em></p>
+  <div class="alert alert-danger" *ngIf="errorMessage != null">{{ errorMessage }}</div>
+  <div *ngIf="employees">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <a class="btn btn-success float-right" [routerLink]="['/employees', '0']">Add Employee</a>
+      </div>
+    </div>
+    <div class="row grid-container">
+      <div class="col-md-12">
+        <div class="table">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Dependent Information</th>
+                <th>Total Annual Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of employees">
+                <td><a [routerLink]="['/employees', employee.employeeID]">{{ employee.firstName }} {{ employee.lastName }}</a></td>
+                <td>
+                  <div *ngIf="!employee.dependents.length">No Dependents</div>
+                  <div *ngFor="let dependent of employee.dependents">
+                    {{ dependent.firstName }} {{dependent.lastName }} -
+                    <span placement="top" ngbTooltip="({{dependent.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
+                      {{dependent.benefitCost.annualBenefitCost | currency}}
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  <span placement="top" ngbTooltip="({{employee.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
+                    {{ employee.benefitCost.annualBenefitCost | currency }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </td>
-      <td>
-        <span placement="top" ngbTooltip="({{employee.benefitCost.paycheckBenefitCost | currency}} per paycheck)">
-          {{ employee.benefitCost.annualBenefitCost | currency }}
-        </span>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      </div>
+    </div>
+  </div>
 </div>

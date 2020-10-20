@@ -1,4 +1,5 @@
-﻿using EmployeeBenefitsCostChallenge.Domain.Common;
+﻿using System;
+using EmployeeBenefitsCostChallenge.Domain.Common;
 using EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate;
 using EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost.BenefitCostStrategies;
 using FluentAssertions;
@@ -74,7 +75,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Services.BenefitCost
             var paycheckBenefitCost = service.GetBenefitCost(p).PaycheckBenefitCost;
 
             //assert
-            paycheckBenefitCost.Should().Be(1000M/26);
+            paycheckBenefitCost.Should().Be(Math.Round(1000M/26, 2));
         }
     }
 }

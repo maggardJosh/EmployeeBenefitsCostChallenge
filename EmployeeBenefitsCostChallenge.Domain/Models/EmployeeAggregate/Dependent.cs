@@ -8,6 +8,8 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
     public class Dependent : Person
     {
         public int ID { get; set; }
+
+        public Dependent() { }
         public Dependent(string firstName, string lastName) : base(firstName, lastName)
         {
         }
@@ -18,7 +20,6 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
             return settingsRepository.DependentAnnualBenefitCost;
         }
 
-        [NotMapped]
-        public override IReadOnlyList<Dependent> Dependents => new List<Dependent>().AsReadOnly();
+        [NotMapped] public override List<Dependent> Dependents { get; set; } = new List<Dependent>();
     }
 }

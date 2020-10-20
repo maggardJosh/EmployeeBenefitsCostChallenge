@@ -40,8 +40,7 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
         {
             try
             {
-
-                _dbContext.Employees.Add(newEmployee);
+                _dbContext.Employees.Attach(newEmployee);
                 _dbContext.SaveChanges();
                 return OperationResult<Employee>.Ok(newEmployee);
             }
@@ -74,7 +73,18 @@ namespace EmployeeBenefitsCostChallenge.Persistence.Repositories
         {
             try
             {
-                _dbContext.Employees.Attach(employee);
+                var employeeOperation = GetEmployeeByID(employee.EmployeeID);
+                if(!employeeOperation.Success)
+                    return OperationResult<Employee>.Error(employeeOperation.Message);
+
+                Employee employeeToUpdate = employeeOperation.Result;
+
+                employeeToUpdate.FirstName = employee.FirstName;
+                employeeToUpdate.LastName = employee.LastName;
+                employeeToUpdate.ClearDependents();
+                foreach(var dependent in employee.Dependents)
+                    employeeToUpdate.AddDependent(dependent);
+
                 _dbContext.SaveChanges();
                 return OperationResult<Employee>.Ok(employee);
             }

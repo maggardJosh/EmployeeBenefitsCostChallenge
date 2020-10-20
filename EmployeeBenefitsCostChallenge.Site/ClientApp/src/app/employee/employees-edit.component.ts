@@ -24,6 +24,7 @@ export class EmployeesEditComponent {
 
   buildForm(e: Employee): FormGroup {
     return this.fb.group({
+      employeeID: e.employeeID,
       firstName: e.firstName,
       lastName: e.lastName,
       dependents: this.fb.array(e.dependents.map(d => this.buildDependentForm(d)))
@@ -65,6 +66,7 @@ export class EmployeesEditComponent {
             return;
           },
           error => console.error(error));
+      return;
     }
 
     const id = this.route.snapshot.params['id'];

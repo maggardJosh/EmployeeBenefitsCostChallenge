@@ -7,6 +7,7 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
     {
         public int EmployeeID { get; set; }
 
+        public Employee() { }
         public Employee(string firstName, string lastName) : base(firstName, lastName)
         {
         }
@@ -17,17 +18,16 @@ namespace EmployeeBenefitsCostChallenge.Domain.Models.EmployeeAggregate
             return settingsRepository.StandardAnnualBenefitCost;
         }
 
-        public override IReadOnlyList<Dependent> Dependents => _dependents.AsReadOnly();
-        private readonly List<Dependent> _dependents = new List<Dependent>();
+        public override List<Dependent> Dependents { get; set; } = new List<Dependent>();
 
         public void AddDependent(Dependent dependent)
         {
-            _dependents.Add(dependent);
+            Dependents.Add(dependent);
         }
 
         public void ClearDependents()
         {
-            _dependents.Clear();
+            Dependents.Clear();
         }
     }
 }
