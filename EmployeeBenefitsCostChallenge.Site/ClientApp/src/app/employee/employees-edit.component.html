@@ -1,24 +1,26 @@
-<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="container">
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="container" novalidate>
   <div class="row mb-3">
     <div class="col-md-8 offset-md-2"><h2>Employee Information</h2></div>
   </div>
   <div class="row">
-    <div class="col-md-2 offset-md-4" *ngIf="!loaded">Loading...</div>
+    <div class="col-md-2 offset-md-4" *ngIf="!loaded && errorMessage == null">Loading...</div>
     <div class="col-md-8 offset-md-2" *ngIf="loaded">
       <div class="form-group">
-        <label for="firstName">First Name</label>
+        <label>First Name</label>
         <input type="text" class="form-control" formControlName="firstName" />
+        <div class="alert alert-danger" [hidden]="employeeForm.controls.firstName.untouched || employeeForm.controls.firstName.valid">First Name is required</div>
       </div>
       <div class="form-group">
-        <label for="lastName">Last Name</label>
+        <label>Last Name</label>
         <input type="text" class="form-control" formControlName="lastName" />
+        <div class="alert alert-danger" [hidden]="employeeForm.controls.lastName.untouched || employeeForm.controls.lastName.valid">Last Name is required</div>
       </div>
       <div class="container mt-4">
         <h4>Dependents</h4>
         <div *ngIf="dependents.controls.length" formArrayName="dependents" class="form-group">
           <div *ngFor="let control of dependents.controls; index as i" formGroupName="{{i}}" class="row form-group">
-            <input class="col-md-4 ml-1 my-1" placeholder="First Name" formControlName="firstName" />
-            <input class="col-md-4 ml-1 my-1" placeholder="Last Name" formControlName="lastName" />
+            <input class="col-md-4 ml-1 my-1" [ngClass]="{'alert-danger': control.get('firstName').invalid && !control.get('firstName').untouched}" placeholder="First Name" formControlName="firstName" />
+            <input class="col-md-4 ml-1 my-1" [ngClass]="{'alert-danger': control.get('lastName').invalid && !control.get('lastName').untouched}" placeholder="Last Name" formControlName="lastName" />
             <button type="button" class="btn btn-sm btn-danger col-md-2 ml-1 my-1" (click)="removeDependent(i)">Remove</button>
           </div>
         </div>
@@ -30,8 +32,9 @@
       <div class="form-group mt-5">
         <button type="button" class="btn btn-danger " *ngIf="isEdit" (click)="deleteEmployee()">Delete</button>
         <button type="button" class="btn btn-secondary float-right mx-2" (click)="navigateHome()">Cancel</button>
-        <button type="button" class="btn btn-success float-right" (click)="onSubmit()">Save</button>
+        <button type="button" class="btn btn-success float-right" [disabled]="!employeeForm.valid" (click)="onSubmit()">Save</button>
       </div>
     </div>
   </div>
+  <div class="row"><div class="alert alert-danger col-md-8 offset-md-2" *ngIf="errorMessage != null">{{ errorMessage }}</div></div>
 </form>

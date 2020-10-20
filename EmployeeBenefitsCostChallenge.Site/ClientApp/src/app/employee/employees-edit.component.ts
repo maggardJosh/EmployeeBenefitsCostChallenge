@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee, Dependent } from "./models/Employee.model";
 
@@ -13,6 +13,7 @@ export class EmployeesEditComponent {
   employeeForm: FormGroup;
   loaded: boolean = false;
   isEdit: boolean = false;
+  errorMessage: string;
 
 
   constructor(private http: HttpClient,
@@ -25,14 +26,16 @@ export class EmployeesEditComponent {
   buildForm(e: Employee): FormGroup {
     return this.fb.group({
       employeeID: e.employeeID,
-      firstName: e.firstName,
-      lastName: e.lastName,
+      firstName: [e.firstName, Validators.required],
+      lastName: [e.lastName, Validators.required],
       dependents: this.fb.array(e.dependents.map(d => this.buildDependentForm(d)))
     });
   }
 
   buildDependentForm(d: Dependent): FormGroup {
-    return this.fb.group({ firstName: d.firstName, lastName: d.lastName });
+    return this.fb.group({
+       firstName: [d.firstName, Validators.required], lastName: [d.lastName, Validators.required]
+    });
   }
 
   get dependents(): FormArray {
@@ -48,11 +51,12 @@ export class EmployeesEditComponent {
     }
 
     this.http.get<Employee>('api/employee/' + id).subscribe(result => {
-      //TODO: extract this to data retrieval service
-      this.employeeForm = this.buildForm(result);
-      this.loaded = true;
-    },
-      error => console.error(error));
+        //TODO: extract this to data retrieval service
+        this.employeeForm = this.buildForm(result);
+        this.loaded = true;
+      },
+      () => { this.errorMessage = "Error retrieving employee information" }
+  );
 
 
   }
