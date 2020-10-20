@@ -40,14 +40,19 @@ namespace EmployeeBenefitsCostChallenge.Persistence
             if (context.Employees.Any())
                 return;
 
-            var e1 = new Employee("Josh", "Maggard");
-            e1.AddDependent(new Dependent("Alice", "Random"));
-            e1.AddDependent(new Dependent("Jerry", "Random"));
-            var e2 = new Employee("George", "Someone");
+            var e1 = new Employee("John", "Roberts");
+            e1.AddDependent(new Dependent("Alice", "Roberts"));
+            e1.AddDependent(new Dependent("Jerry", "Roberts"));
+            var e2 = new Employee("Antoine", "Dupont");
+            var e3 = new Employee("Darren", "Chadwick");
+            e3.AddDependent(new Dependent("Aran", "Chadwick"));
+            e3.AddDependent(new Dependent("Maria", "Chadwick"));
+            e3.AddDependent(new Dependent("Jacqueline", "Chadwick"));
+
 
             var employees = new[]
             {
-                e1, e2
+                e1, e2, e3
             };
 
             foreach (var employee in employees)
