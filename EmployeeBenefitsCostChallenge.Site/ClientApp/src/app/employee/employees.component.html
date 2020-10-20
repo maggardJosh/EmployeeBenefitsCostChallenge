@@ -8,7 +8,7 @@
 <div *ngIf="employees">
   <div class="row mb-4">
     <div class="col-md-12">
-      <a class="btn btn-success float-right" [routerLink]="['/employees', '0']">Add Employee</a>
+      <a id="addButton" class="btn btn-success float-right" [routerLink]="['/employees', '0']">Add Employee</a>
     </div>
   </div>
   <div class="row grid-container">
@@ -25,7 +25,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let employee of employees">
-              <td><a [routerLink]="['/employees', employee.employeeID]">{{ employee.firstName }} {{ employee.lastName }}</a></td>
+              <td><a id="editButton" [routerLink]="['/employees', employee.employeeID]">{{ employee.firstName }} {{ employee.lastName }}</a></td>
               <td>
                 <span placement="top" ngbTooltip="{{employee.individualBenefitCost.paycheckBenefitCost | currency}} per paycheck">
                   {{employee.individualBenefitCost.annualBenefitCost | currency }}

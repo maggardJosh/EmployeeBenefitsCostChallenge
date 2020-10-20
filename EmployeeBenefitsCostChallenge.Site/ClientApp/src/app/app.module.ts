@@ -11,6 +11,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { EmployeesComponent } from "./employee/employees.component";
 import { EmployeesEditComponent } from "./employee/employees-edit.component";
 
+import { routes } from "./router";
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,11 +25,7 @@ import { EmployeesEditComponent } from "./employee/employees-edit.component";
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: 'employees', component: EmployeesComponent, pathMatch: 'full' },
-      { path: 'employees/:id', component: EmployeesEditComponent },
-      { path: '**', pathMatch: 'full', redirectTo: '/employees' }
-    ])
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
